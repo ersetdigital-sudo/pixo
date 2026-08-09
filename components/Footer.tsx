@@ -1,11 +1,15 @@
 import Link from "next/link";
+import { LogoMark } from "@/components/ui/LogoMark";
 
 export function Footer() {
   return (
     <footer className="border-t border-white/10">
       <div className="mx-auto grid max-w-7xl gap-10 px-5 py-14 md:grid-cols-3">
         <div>
-          <span className="display text-lg font-extrabold">PIXOGAMEONLINE</span>
+          <div className="flex items-center gap-2.5">
+            <LogoMark className="h-9 w-9" />
+            <span className="display text-lg font-extrabold">PIXOGAMEONLINE</span>
+          </div>
           <p className="mt-3 max-w-xs text-sm text-[var(--muted)]">Tempat top up game dengan proses simpel dan praktis. Isi ulang diamond dan kredit game favoritmu tanpa registrasi atau login — pilih game, masukkan User ID, tentukan nominal, bayar, dan pesanan diproses dengan cepat.</p>
         </div>
         <div>
@@ -28,7 +32,7 @@ export function Footer() {
           </ul>
         </div>
       </div>
-      <div className="mx-auto max-w-7xl border-t border-white/10 px-5 py-6 text-xs text-[var(--muted)]">
+      <div className="mx-auto max-w-7xl border-t border-white/10 px-5 py-6 text-center text-xs text-[var(--muted)]">
         <p>© 2026 PIXOGAMEONLINE. All rights reserved.</p>
         <p className="mt-2">Nama game dan mata uang dalam game adalah milik publisher masing-masing. PIXOGAMEONLINE tidak berafiliasi dengan publisher mana pun.</p>
       </div>
@@ -41,7 +45,10 @@ export function FooterCompact() {
     <footer className="border-t border-white/10">
       <div className="mx-auto grid max-w-7xl gap-10 px-5 py-14 md:grid-cols-3">
         <div>
-          <span className="display text-lg font-extrabold">PIXOGAMEONLINE</span>
+          <div className="flex items-center gap-2.5">
+            <LogoMark className="h-9 w-9" />
+            <span className="display text-lg font-extrabold">PIXOGAMEONLINE</span>
+          </div>
           <p className="mt-3 max-w-xs text-sm text-[var(--muted)]">Tempat top up game dengan proses simpel dan praktis. Isi ulang diamond dan kredit game favoritmu tanpa registrasi atau login — pilih game, masukkan User ID, tentukan nominal, bayar, dan pesanan diproses dengan cepat.</p>
         </div>
         <div>
@@ -63,7 +70,7 @@ export function FooterCompact() {
           </ul>
         </div>
       </div>
-      <div className="mx-auto max-w-7xl border-t border-white/10 px-5 py-6 text-xs text-[var(--muted)]">
+      <div className="mx-auto max-w-7xl border-t border-white/10 px-5 py-6 text-center text-xs text-[var(--muted)]">
         <p>© 2026 PIXOGAMEONLINE. All rights reserved.</p>
         <p className="mt-2">Nama game dan mata uang dalam game adalah milik publisher masing-masing. PIXOGAMEONLINE tidak berafiliasi dengan publisher mana pun.</p>
       </div>
