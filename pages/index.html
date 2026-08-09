@@ -1,0 +1,296 @@
+<!DOCTYPE html>
+<html lang="id"><head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>PIXOGAMEONLINE — Top Up Game Cepat &amp; Aman</title>
+<meta name="description" content="Top up Mobile Legends, Free Fire, PUBG Mobile, COD Mobile, dan Magic Chess Go Go. Tanpa password, tanpa login akun, proses otomatis.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="">
+<link href="https://fonts.googleapis.com/css2?family=Sora:wght@400;600;700;800&amp;family=Manrope:wght@400;500;600;700&amp;display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg:#0a1024; --surface:#111a33; --ink:#f3f6ff; --muted:#93a1c4;
+    /* palet PIXOGAMEONLINE: midnight navy + gold/ember + electric blue */
+    --violet:#ff6a2c; --cyan:#ffc24b; --blue:#4c8dff; --line:rgba(255,255,255,.10);
+  }
+  body{background:var(--bg);color:var(--ink);font-family:"Manrope",system-ui,sans-serif;}
+  h1,h2,h3,.display{font-family:"Sora",system-ui,sans-serif;letter-spacing:-.02em;}
+  .grad{background:linear-gradient(100deg,var(--cyan),var(--violet) 65%,#ff4d6d);-webkit-background-clip:text;background-clip:text;color:transparent;}
+  .card{background:linear-gradient(180deg,rgba(255,255,255,.06),rgba(255,255,255,.02));border:1px solid var(--line);backdrop-filter:blur(8px);}
+  .card:hover{border-color:rgba(255,194,75,.55);}
+  .glow{position:absolute;border-radius:9999px;filter:blur(90px);opacity:.45;pointer-events:none;}
+  .btn-primary{background:linear-gradient(100deg,var(--violet),var(--cyan));box-shadow:0 12px 40px -12px rgba(255,138,46,.85);}
+  .btn-primary:hover{filter:brightness(1.08);}
+  .noise:before{content:"";position:absolute;inset:0;background-image:radial-gradient(rgba(255,255,255,.06) 1px,transparent 1px);background-size:22px 22px;opacity:.4;pointer-events:none;}
+  details[open] .chev{transform:rotate(45deg);}
+  .marquee{animation:slide 26s linear infinite;}
+  @keyframes slide{to{transform:translateX(-50%)}}
+  .logo-float{animation:float 6s ease-in-out infinite;filter:drop-shadow(0 18px 44px rgba(255,138,46,.35));}
+  @keyframes float{0%,100%{transform:translateY(-6px)}50%{transform:translateY(6px)}}
+</style>
+<script src="https://cdn.moda.app/runtime-libs/tailwind-browser-4.1.13-index.global.min.js"></script><style data-moda-export-fonts="true">@font-face { font-family: 'Manrope'; src: url("../fonts/manrope-wght--extralight.ttf") format("truetype"); font-style: normal; font-weight: 200; font-display: swap; }
+@font-face { font-family: 'Manrope'; src: url("../fonts/manrope-wght--light.ttf") format("truetype"); font-style: normal; font-weight: 300; font-display: swap; }
+@font-face { font-family: 'Manrope'; src: url("../fonts/manrope-wght--regular.ttf") format("truetype"); font-style: normal; font-weight: 400; font-display: swap; }
+@font-face { font-family: 'Manrope'; src: url("../fonts/manrope-wght--medium.ttf") format("truetype"); font-style: normal; font-weight: 500; font-display: swap; }
+@font-face { font-family: 'Manrope'; src: url("../fonts/manrope-wght--semibold.ttf") format("truetype"); font-style: normal; font-weight: 600; font-display: swap; }
+@font-face { font-family: 'Manrope'; src: url("../fonts/manrope-wght--bold.ttf") format("truetype"); font-style: normal; font-weight: 700; font-display: swap; }
+@font-face { font-family: 'Manrope'; src: url("../fonts/manrope-wght--extrabold.ttf") format("truetype"); font-style: normal; font-weight: 800; font-display: swap; }
+@font-face { font-family: 'Sora'; src: url("../fonts/sora-wght--thin.ttf") format("truetype"); font-style: normal; font-weight: 100; font-display: swap; }
+@font-face { font-family: 'Sora'; src: url("../fonts/sora-wght--extralight.ttf") format("truetype"); font-style: normal; font-weight: 200; font-display: swap; }
+@font-face { font-family: 'Sora'; src: url("../fonts/sora-wght--light.ttf") format("truetype"); font-style: normal; font-weight: 300; font-display: swap; }
+@font-face { font-family: 'Sora'; src: url("../fonts/sora-wght--regular.ttf") format("truetype"); font-style: normal; font-weight: 400; font-display: swap; }
+@font-face { font-family: 'Sora'; src: url("../fonts/sora-wght--medium.ttf") format("truetype"); font-style: normal; font-weight: 500; font-display: swap; }
+@font-face { font-family: 'Sora'; src: url("../fonts/sora-wght--semibold.ttf") format("truetype"); font-style: normal; font-weight: 600; font-display: swap; }
+@font-face { font-family: 'Sora'; src: url("../fonts/sora-wght--bold.ttf") format("truetype"); font-style: normal; font-weight: 700; font-display: swap; }
+@font-face { font-family: 'Sora'; src: url("../fonts/sora-wght--extrabold.ttf") format("truetype"); font-style: normal; font-weight: 800; font-display: swap; }</style></head>
+<body class="antialiased">
+
+<!-- NAV -->
+<header class="sticky top-0 z-50 border-b border-white/10 bg-[#0a1024]/85 backdrop-blur-xl">
+  <div class="mx-auto flex max-w-7xl items-center justify-between px-5 py-4">
+    <a href="#" class="flex items-center gap-2.5">
+      <svg viewBox="0 0 40 40" class="h-9 w-9" aria-hidden="true">
+        <defs>
+          <linearGradient id="navGold" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#FFE9A8"></stop><stop offset=".5" stop-color="#FFC24B"></stop><stop offset="1" stop-color="#FF6A2C"></stop></linearGradient>
+          <linearGradient id="navEdge" x1="0" y1="1" x2="1" y2="0"><stop offset="0" stop-color="#4C8DFF"></stop><stop offset="1" stop-color="#FFC24B"></stop></linearGradient>
+        </defs>
+        <path d="M20 2.5 34.6 11v18L20 37.5 5.4 29V11z" fill="#101a33" stroke="url(#navEdge)" stroke-width="2" stroke-linejoin="round"></path>
+        <path fill-rule="evenodd" clip-rule="evenodd" d="M13 11h12l4 4v4l-4 4h-6.5v6H13V11zm5.5 4.5h5.1l1.1 1.1v1.3l-1.1 1.1h-5.1v-3.5z" fill="url(#navGold)"></path>
+      </svg>
+      <span class="display text-lg font-extrabold tracking-tight">PIXOGAMEONLINE</span>
+    </a>
+    <nav class="hidden items-center gap-8 text-sm text-[var(--muted)] md:flex">
+      <a href="#game" class="hover:text-white transition">Game</a>
+      <a href="#cara" class="hover:text-white transition">Cara Top Up</a>
+      <a href="#aman" class="hover:text-white transition">Keamanan</a>
+      <a href="#faq" class="hover:text-white transition">FAQ</a>
+    </nav>
+    <a href="#game" class="btn-primary rounded-full px-5 py-2.5 text-sm font-bold text-[#0a1024] transition">Top Up</a>
+  </div>
+</header>
+
+<!-- HERO -->
+<section class="noise relative overflow-hidden">
+  <div class="glow -left-24 top-0 h-80 w-80 bg-[#ff6a2c]"></div>
+  <div class="glow right-0 top-32 h-96 w-96 bg-[#4c8dff]"></div>
+  <div class="relative mx-auto grid max-w-7xl items-center gap-14 px-5 py-20 md:py-28 lg:grid-cols-2">
+    <div>
+      <span class="inline-flex items-center gap-2 rounded-full border border-white/15 bg-white/5 px-4 py-1.5 text-xs font-semibold tracking-wide text-[var(--muted)]">
+        <span class="h-1.5 w-1.5 rounded-full bg-emerald-400"></span> Layanan top up game · Indonesia
+      </span>
+      <h1 class="mt-6 text-5xl font-extrabold leading-[1.05] sm:text-6xl lg:text-7xl">
+        Top Up Game<br><span class="grad">Tanpa Login Akun</span>
+      </h1>
+      <p class="mt-6 max-w-xl text-lg leading-relaxed text-[var(--muted)]">
+        Beli Diamond Mobile Legends, Free Fire, UC PUBG Mobile, dan CP Call of Duty Mobile cukup dengan User ID. Pilih nominal, selesaikan pembayaran, dan item langsung masuk ke akun kamu.
+      </p>
+      <div class="mt-8 flex flex-wrap gap-3">
+        <a href="/top-up" class="btn-primary rounded-full px-7 py-3.5 text-sm font-bold text-[#0a1024] transition">Top Up Sekarang</a>
+        <a href="#game" class="rounded-full border border-white/15 px-7 py-3.5 text-sm font-bold text-white transition hover:bg-white/10">Lihat Daftar Harga</a>
+      </div>
+      <div class="mt-9 flex flex-wrap gap-x-7 gap-y-3 text-sm text-[var(--muted)]">
+        <span class="flex items-center gap-2"><svg viewBox="0 0 20 20" class="h-4 w-4 text-[var(--cyan)]" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="m4 10.5 4 4 8-9"></path></svg> Tanpa registrasi</span>
+        <span class="flex items-center gap-2"><svg viewBox="0 0 20 20" class="h-4 w-4 text-[var(--cyan)]" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="m4 10.5 4 4 8-9"></path></svg> Harga transparan</span>
+        <span class="flex items-center gap-2"><svg viewBox="0 0 20 20" class="h-4 w-4 text-[var(--cyan)]" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="m4 10.5 4 4 8-9"></path></svg> Proses otomatis 24 jam</span>
+      </div>
+    </div>
+    <div class="relative">
+      <div class="relative grid place-items-center overflow-hidden rounded-[32px] border border-white/10 bg-[radial-gradient(circle_at_50%_35%,rgba(255,138,46,.22),rgba(10,16,36,0)_65%)] px-6 py-16 shadow-2xl">
+        <div class="pointer-events-none absolute inset-0 opacity-[.35]" style="background-image:linear-gradient(rgba(255,255,255,.06) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,.06) 1px,transparent 1px);background-size:44px 44px;-webkit-mask-image:radial-gradient(circle at 50% 45%,#000,transparent 70%);mask-image:radial-gradient(circle at 50% 45%,#000,transparent 70%)"></div>
+        <svg viewBox="0 0 200 200" class="logo-float relative h-56 w-56 sm:h-64 sm:w-64" aria-label="Logo PIXOGAMEONLINE">
+          <defs>
+            <linearGradient id="gGold" x1="0" y1="0" x2="1" y2="1">
+              <stop offset="0" stop-color="#FFD97A"></stop><stop offset=".55" stop-color="#FFC24B"></stop><stop offset="1" stop-color="#FF6A2C"></stop>
+            </linearGradient>
+            <linearGradient id="gEdge" x1="0" y1="1" x2="1" y2="0">
+              <stop offset="0" stop-color="#4C8DFF"></stop><stop offset="1" stop-color="#FFC24B"></stop>
+            </linearGradient>
+          </defs>
+          <polygon points="100,10 178,55 178,145 100,190 22,145 22,55" fill="#101a33" stroke="url(#gEdge)" stroke-width="3.5" stroke-linejoin="round"></polygon>
+          <polygon points="100,28 162,64 162,136 100,172 38,136 38,64" fill="rgba(255,255,255,.03)" stroke="rgba(255,255,255,.10)" stroke-width="1.5"></polygon>
+          <g transform="translate(20.2 24) scale(3.8)">
+            <path fill-rule="evenodd" clip-rule="evenodd" d="M13 11h12l4 4v4l-4 4h-6.5v6H13V11zm5.5 4.5h5.1l1.1 1.1v1.3l-1.1 1.1h-5.1v-3.5z" fill="url(#gGold)"></path>
+            <path d="M13 11h12l4 4" fill="none" stroke="rgba(255,255,255,.45)" stroke-width=".7"></path>
+          </g>
+          <path d="M62 152h18" stroke="#4C8DFF" stroke-width="3" stroke-linecap="round" opacity=".8"></path>
+          <path d="M120 152h18" stroke="#FF6A2C" stroke-width="3" stroke-linecap="round" opacity=".8"></path>
+          <circle cx="100" cy="100" r="78" fill="none" stroke="rgba(76,141,255,.22)" stroke-width="1.2" stroke-dasharray="5 9"></circle>
+        </svg>
+        <p class="display relative mt-6 text-center text-xl font-extrabold tracking-[.18em]">PIXOGAMEONLINE</p>
+        <p class="relative mt-2 text-center text-xs uppercase tracking-[.28em] text-[var(--muted)]">Official Top Up Store</p>
+      </div>
+      <div class="card absolute -bottom-6 left-4 rounded-2xl px-5 py-4 sm:left-8">
+        <p class="text-xs text-[var(--muted)]">Rata-rata pengiriman</p>
+        <p class="display text-2xl font-bold">&lt; 60 detik</p>
+      </div>
+      <div class="card absolute -top-5 right-4 rounded-2xl px-5 py-4">
+        <p class="text-xs text-[var(--muted)]">Pembayaran</p>
+        <p class="display text-sm font-bold">QRIS · E-wallet · Bank</p>
+      </div>
+    </div>
+  </div>
+  <!-- marquee -->
+  <div class="relative overflow-hidden border-y border-white/10 py-4">
+    <div class="marquee flex w-max gap-10 whitespace-nowrap text-sm font-semibold uppercase tracking-[.2em] text-white/25">
+      <span>Mobile Legends • Free Fire • PUBG Mobile • COD Mobile • Magic Chess Go Go •&nbsp;</span>
+      <span>Mobile Legends • Free Fire • PUBG Mobile • COD Mobile • Magic Chess Go Go •&nbsp;</span>
+    </div>
+  </div>
+</section>
+
+<!-- GAMES -->
+<section id="game" class="mx-auto max-w-7xl px-5 py-20 md:py-28">
+  <div class="flex flex-wrap items-end justify-between gap-4">
+    <div>
+      <p class="text-xs font-bold uppercase tracking-[.2em] text-[var(--cyan)]">Katalog</p>
+      <h2 class="mt-3 text-4xl font-extrabold sm:text-5xl">Lima Game Favorit,<br class="hidden sm:block"> Satu Alur Top Up</h2>
+      <p class="mt-4 max-w-xl text-[var(--muted)]">Kami sengaja nggak jual ratusan judul. Fokus di lima game paling ramai supaya stok selalu aman dan pengiriman tetap instan.</p>
+    </div>
+    <a href="/top-up" class="text-sm font-semibold text-[var(--cyan)] hover:text-white">Lihat semua nominal →</a>
+  </div>
+
+  <div class="mt-12 grid gap-5 lg:grid-cols-3">
+    <a href="/top-up" class="card group relative col-span-1 overflow-hidden rounded-3xl p-8 transition lg:row-span-2">
+      <span class="absolute right-6 top-6 rounded-full bg-[#ff6a2c]/20 px-3 py-1 text-[11px] font-bold text-[#ffc24b]">Paling dicari</span>
+      <img src="../images/35754b49-10b8-442c-a813-23ec98dd30ab.png" alt="Mobile Legends" class="h-20 w-20 rounded-2xl object-contain">
+      <h3 class="mt-6 text-2xl font-bold">Mobile Legends</h3>
+      <p class="mt-1 text-sm font-semibold text-[var(--cyan)]">Diamond</p>
+      <p class="mt-4 text-sm leading-relaxed text-[var(--muted)]">Dari 5 sampai 2.195 Diamond plus Weekly &amp; Twilight Pass. Masuk langsung ke User ID + Zone ID kamu, tanpa login akun.</p>
+      <p class="mt-4 text-xs text-[var(--muted)]">Mulai dari <span class="display text-base font-bold text-white">Rp1.500</span></p>
+      <span class="mt-8 inline-flex items-center gap-2 text-sm font-bold text-white">Top Up Mobile Legends <span class="transition group-hover:translate-x-1">→</span></span>
+    </a>
+
+    <a href="/top-up" class="card group rounded-3xl p-7 transition"><div class="flex items-start justify-between"><div><h3 class="text-xl font-bold">Free Fire</h3><p class="mt-1 text-sm font-semibold text-[var(--cyan)]">Diamond</p><p class="mt-3 text-sm text-[var(--muted)]">Diamond FF cair sebelum booyah. Cukup User ID, mulai Rp1.500.</p></div><span class="text-xl text-[var(--muted)] transition group-hover:translate-x-1 group-hover:text-white">→</span></div></a>
+    <a href="/top-up" class="card group rounded-3xl p-7 transition"><div class="flex items-start justify-between"><div><h3 class="text-xl font-bold">PUBG Mobile</h3><p class="mt-1 text-sm font-semibold text-[var(--cyan)]">UC</p><p class="mt-3 text-sm text-[var(--muted)]">UC resmi buat Royale Pass &amp; crate. Kirim ke User ID kamu.</p></div><span class="text-xl text-[var(--muted)] transition group-hover:translate-x-1 group-hover:text-white">→</span></div></a>
+    <a href="/top-up" class="card group rounded-3xl p-7 transition"><div class="flex items-start justify-between"><div><h3 class="text-xl font-bold">Call of Duty: Mobile</h3><p class="mt-1 text-sm font-semibold text-[var(--cyan)]">CP</p><p class="mt-3 text-sm text-[var(--muted)]">CP buat skin legendaris &amp; Battle Pass, proses otomatis.</p></div><span class="text-xl text-[var(--muted)] transition group-hover:translate-x-1 group-hover:text-white">→</span></div></a>
+    <a href="/top-up" class="card group rounded-3xl p-7 transition"><div class="flex items-start justify-between"><div><h3 class="text-xl font-bold">Magic Chess: Go Go</h3><p class="mt-1 text-sm font-semibold text-[var(--cyan)]">Diamond / Pass</p><p class="mt-3 text-sm text-[var(--muted)]">Diamond &amp; Pass buat push rank commander kamu.</p></div><span class="text-xl text-[var(--muted)] transition group-hover:translate-x-1 group-hover:text-white">→</span></div></a>
+  </div>
+</section>
+
+<!-- WHY -->
+<section class="relative overflow-hidden border-y border-white/10 bg-white/[.02]">
+  <div class="glow left-1/3 top-10 h-72 w-72 bg-[#4c8dff] opacity-25"></div>
+  <div class="relative mx-auto max-w-7xl px-5 py-20 md:py-28">
+    <p class="text-xs font-bold uppercase tracking-[.2em] text-[var(--cyan)]">Kenapa PIXOGAMEONLINE</p>
+    <h2 class="mt-3 max-w-2xl text-4xl font-extrabold sm:text-5xl">Empat Detik Berpikir,<br class="hidden sm:block"> Sisanya Kami Urus</h2>
+    <p class="mt-4 max-w-2xl text-[var(--muted)]">Nggak ada form panjang, nggak ada biaya kejutan. Empat langkah, semuanya transparan dari awal sampai item masuk.</p>
+    <div class="mt-12 grid gap-5 sm:grid-cols-2 lg:grid-cols-4">
+      <div class="card rounded-3xl p-7"><span class="display text-3xl font-extrabold text-white/15">01</span><h3 class="mt-3 text-lg font-bold">Katalog Fokus</h3><p class="mt-2 text-sm text-[var(--muted)]">Lima game paling ramai di Indonesia. Nggak perlu scroll ratusan menu buat nemu yang kamu main.</p></div>
+      <div class="card rounded-3xl p-7"><span class="display text-3xl font-extrabold text-white/15">02</span><h3 class="mt-3 text-lg font-bold">Data Seminimal Mungkin</h3><p class="mt-2 text-sm text-[var(--muted)]">Cukup User ID. Nggak ada password, nggak ada OTP, nggak ada akses ke akun kamu.</p></div>
+      <div class="card rounded-3xl p-7"><span class="display text-3xl font-extrabold text-white/15">03</span><h3 class="mt-3 text-lg font-bold">Harga Apa Adanya</h3><p class="mt-2 text-sm text-[var(--muted)]">Semua nominal tampil lengkap dengan harganya sejak awal. Yang kamu lihat, itu yang kamu bayar.</p></div>
+      <div class="card rounded-3xl p-7"><span class="display text-3xl font-extrabold text-white/15">04</span><h3 class="mt-3 text-lg font-bold">Masuk Otomatis</h3><p class="mt-2 text-sm text-[var(--muted)]">Begitu pembayaran terkonfirmasi, item langsung dikirim. Rata-rata di bawah satu menit.</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- CARA -->
+<section id="cara" class="mx-auto max-w-7xl px-5 py-20 md:py-28">
+  <div class="grid gap-12 lg:grid-cols-[1fr_1.2fr]">
+    <div>
+      <p class="text-xs font-bold uppercase tracking-[.2em] text-[var(--cyan)]">Cara Top Up</p>
+      <h2 class="mt-3 text-4xl font-extrabold sm:text-5xl">Selesai Sebelum<br>Loading Screen Habis</h2>
+      <p class="mt-4 text-[var(--muted)]">Alurnya sama di semua game. Sekali hafal, top up berikutnya tinggal ulang — nggak sampai satu menit.</p>
+      <a href="/top-up" class="btn-primary mt-8 inline-block rounded-full px-7 py-3.5 text-sm font-bold text-[#0a1024]">Mulai Top Up →</a>
+    </div>
+    <ol class="space-y-4">
+      <li class="card flex gap-5 rounded-2xl p-6"><span class="display text-xl font-bold text-[var(--cyan)]">01</span><div><h3 class="font-bold">Pilih game</h3><p class="mt-1 text-sm text-[var(--muted)]">Klik game yang kamu main dari katalog.</p></div></li>
+      <li class="card flex gap-5 rounded-2xl p-6"><span class="display text-xl font-bold text-[var(--cyan)]">02</span><div><h3 class="font-bold">Masukkan User ID</h3><p class="mt-1 text-sm text-[var(--muted)]">Masukkan User ID, dan Zone ID bila diperlukan.</p></div></li>
+      <li class="card flex gap-5 rounded-2xl p-6"><span class="display text-xl font-bold text-[var(--cyan)]">03</span><div><h3 class="font-bold">Pilih nominal</h3><p class="mt-1 text-sm text-[var(--muted)]">Tentukan nominal Diamond, UC, CP, atau Pass.</p></div></li>
+      <li class="card flex gap-5 rounded-2xl p-6"><span class="display text-xl font-bold text-[var(--cyan)]">04</span><div><h3 class="font-bold">Bayar</h3><p class="mt-1 text-sm text-[var(--muted)]">Selesaikan pembayaran, pesanan diproses otomatis.</p></div></li>
+    </ol>
+  </div>
+</section>
+
+<!-- KEAMANAN -->
+<section id="aman" class="relative overflow-hidden border-y border-white/10 bg-white/[.02]">
+  <div class="glow right-10 bottom-0 h-72 w-72 bg-[#4c8dff] opacity-25"></div>
+  <div class="relative mx-auto max-w-7xl px-5 py-20 md:py-28">
+    <div class="max-w-2xl">
+      <p class="text-xs font-bold uppercase tracking-[.2em] text-[var(--cyan)]">Keamanan</p>
+      <h2 class="mt-3 text-4xl font-extrabold sm:text-5xl">Akun Kamu Tetap Milik Kamu</h2>
+      <p class="mt-4 text-[var(--muted)]">Top up yang aman itu yang minta datanya sedikit. PIXOGAMEONLINE cuma butuh User ID — kami tidak pernah minta password, OTP, atau PIN akun game kamu. Titik.</p>
+    </div>
+    <div class="mt-12 grid gap-5 md:grid-cols-3">
+      <div class="card rounded-3xl p-7"><h3 class="text-lg font-bold">Cukup User ID</h3><p class="mt-2 text-sm text-[var(--muted)]">Satu-satunya data yang kami minta adalah tujuan pengiriman item. Selebihnya bukan urusan kami.</p></div>
+      <div class="card rounded-3xl p-7"><h3 class="text-lg font-bold">Tanpa OTP</h3><p class="mt-2 text-sm text-[var(--muted)]">Kalau ada yang mengaku dari kami dan minta kode verifikasi, itu penipu. Kami tidak pernah melakukannya.</p></div>
+      <div class="card rounded-3xl p-7"><h3 class="text-lg font-bold">Tanpa login akun</h3><p class="mt-2 text-sm text-[var(--muted)]">Kami tidak pernah masuk ke akun game kamu. Item dikirim langsung lewat sistem resmi.</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- TENTANG -->
+<section class="mx-auto max-w-7xl px-5 py-20 md:py-28">
+  <div class="grid gap-10 lg:grid-cols-2">
+    <div>
+      <p class="text-xs font-bold uppercase tracking-[.2em] text-[var(--cyan)]">Tentang PIXOGAMEONLINE</p>
+      <h2 class="mt-3 text-4xl font-extrabold sm:text-5xl">Dibangun Buat Gamer,<br class="hidden sm:block"> Bukan Buat Ribet</h2>
+      <p class="mt-5 text-[var(--muted)]">PIXOGAMEONLINE adalah layanan <strong class="text-white">top up game</strong> untuk gamer Indonesia. Kami memilih jalan sebaliknya dari toko lain: bukan menjual semua judul, tapi memastikan lima judul terpopuler selalu tersedia, cepat, dan harganya jelas.</p>
+    </div>
+    <div class="grid gap-5 sm:grid-cols-2">
+      <div class="card rounded-3xl p-7"><h3 class="text-lg font-bold">Game yang tersedia</h3><p class="mt-2 text-sm text-[var(--muted)]"><strong class="text-white">Mobile Legends</strong> &amp; <strong class="text-white">Magic Chess Go Go</strong> untuk Diamond, <strong class="text-white">Free Fire</strong> untuk Diamond, <strong class="text-white">PUBG Mobile</strong> untuk UC, dan <strong class="text-white">COD Mobile</strong> untuk CP.</p></div>
+      <div class="card rounded-3xl p-7"><h3 class="text-lg font-bold">Cara kerjanya</h3><p class="mt-2 text-sm text-[var(--muted)]">Pilih game, isi User ID, pilih nominal, bayar. Kami hanya butuh ID akun — tanpa password, tanpa OTP, tanpa login ke akun game kamu.</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- FAQ -->
+<section id="faq" class="mx-auto max-w-4xl px-5 pb-20 md:pb-28">
+  <p class="text-xs font-bold uppercase tracking-[.2em] text-[var(--cyan)]">FAQ</p>
+  <h2 class="mt-3 text-4xl font-extrabold sm:text-5xl">Pertanyaan yang sering muncul.</h2>
+  <div class="mt-10 divide-y divide-white/10 border-y border-white/10">
+    <details class="group py-5"><summary class="flex cursor-pointer list-none items-center justify-between gap-4 font-semibold">Bagaimana cara top up game di PIXOGAMEONLINE?<span class="chev text-[var(--cyan)] transition">+</span></summary><p class="mt-3 text-sm text-[var(--muted)]">Pilih game, masukkan User ID (dan Zone ID bila diperlukan), pilih nominal, lalu lanjutkan ke pembayaran.</p></details>
+    <details class="group py-5"><summary class="flex cursor-pointer list-none items-center justify-between gap-4 font-semibold">Apakah top up membutuhkan password?<span class="chev text-[var(--cyan)] transition">+</span></summary><p class="mt-3 text-sm text-[var(--muted)]">Tidak. PIXOGAMEONLINE tidak meminta password, OTP, PIN, maupun akses login ke akun game.</p></details>
+    <details class="group py-5"><summary class="flex cursor-pointer list-none items-center justify-between gap-4 font-semibold">Di mana saya menemukan User ID?<span class="chev text-[var(--cyan)] transition">+</span></summary><p class="mt-3 text-sm text-[var(--muted)]">User ID ada di halaman profil dalam game. Buka menu profil atau akun, lalu salin angka ID yang tertera.</p></details>
+    <details class="group py-5"><summary class="flex cursor-pointer list-none items-center justify-between gap-4 font-semibold">Apakah Zone ID diperlukan?<span class="chev text-[var(--cyan)] transition">+</span></summary><p class="mt-3 text-sm text-[var(--muted)]">Hanya untuk Mobile Legends dan Magic Chess Go Go. Zone ID ditulis di dalam tanda kurung setelah User ID.</p></details>
+    <details class="group py-5"><summary class="flex cursor-pointer list-none items-center justify-between gap-4 font-semibold">Berapa lama proses top up?<span class="chev text-[var(--cyan)] transition">+</span></summary><p class="mt-3 text-sm text-[var(--muted)]">Pesanan diproses otomatis setelah pembayaran terkonfirmasi. Bila ada antrean dari sisi penyedia, prosesnya bisa lebih lama.</p></details>
+    <details class="group py-5"><summary class="flex cursor-pointer list-none items-center justify-between gap-4 font-semibold">Apa yang harus dilakukan jika salah memasukkan User ID?<span class="chev text-[var(--cyan)] transition">+</span></summary><p class="mt-3 text-sm text-[var(--muted)]">Hubungi support secepatnya dengan bukti pesanan. Item yang sudah masuk ke ID lain tidak bisa ditarik kembali, jadi pastikan ID benar sebelum bayar.</p></details>
+    <details class="group py-5"><summary class="flex cursor-pointer list-none items-center justify-between gap-4 font-semibold">Apakah pembayaran bisa menggunakan QRIS?<span class="chev text-[var(--cyan)] transition">+</span></summary><p class="mt-3 text-sm text-[var(--muted)]">Ya. QRIS termasuk metode yang didukung, bersama e-wallet dan transfer bank.</p></details>
+    <details class="group py-5"><summary class="flex cursor-pointer list-none items-center justify-between gap-4 font-semibold">Game apa saja yang tersedia di PIXOGAMEONLINE?<span class="chev text-[var(--cyan)] transition">+</span></summary><p class="mt-3 text-sm text-[var(--muted)]">Mobile Legends, Free Fire, PUBG Mobile, Call of Duty Mobile, dan Magic Chess Go Go.</p></details>
+  </div>
+</section>
+
+<!-- CTA -->
+<section class="mx-auto max-w-7xl px-5 pb-20">
+  <div class="noise relative overflow-hidden rounded-[32px] border border-white/10 px-8 py-16 text-center" style="background:linear-gradient(120deg,rgba(255,106,44,.28),rgba(76,141,255,.22))">
+    <h2 class="text-4xl font-extrabold sm:text-5xl">Rank nggak nunggu kamu gajian.</h2>
+    <p class="mx-auto mt-4 max-w-xl text-[var(--muted)]">Mulai dari Rp1.500, diamond kamu bisa masuk sebelum match berikutnya dimulai. Tanpa password, tanpa ribet.</p>
+    <a href="/top-up" class="btn-primary mt-8 inline-block rounded-full px-8 py-4 text-sm font-bold text-[#0a1024]">Top Up Sekarang →</a>
+    <p class="mt-4 text-xs text-[var(--muted)]">QRIS · GoPay · OVO · DANA · ShopeePay · Transfer Bank</p>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer class="border-t border-white/10">
+  <div class="mx-auto grid max-w-7xl gap-10 px-5 py-14 md:grid-cols-3">
+    <div>
+      <span class="display text-lg font-extrabold">PIXOGAMEONLINE</span>
+      <p class="mt-3 max-w-xs text-sm text-[var(--muted)]">Top up game cepat, aman, dan transparan untuk gamer Indonesia. Cukup User ID, item langsung masuk.</p>
+    </div>
+    <div>
+      <h4 class="text-sm font-bold">Game</h4>
+      <ul class="mt-4 space-y-2 text-sm text-[var(--muted)]">
+        <li><a href="#game" class="hover:text-white">Mobile Legends</a></li>
+        <li><a href="#game" class="hover:text-white">Free Fire</a></li>
+        <li><a href="#game" class="hover:text-white">PUBG Mobile</a></li>
+        <li><a href="#game" class="hover:text-white">Call of Duty: Mobile</a></li>
+        <li><a href="#game" class="hover:text-white">Magic Chess: Go Go</a></li>
+      </ul>
+    </div>
+    <div>
+      <h4 class="text-sm font-bold">Halaman</h4>
+      <ul class="mt-4 space-y-2 text-sm text-[var(--muted)]">
+        <li><a href="#game" class="hover:text-white">Semua Game</a></li>
+        <li><a href="#cara" class="hover:text-white">Cara Top Up</a></li>
+        <li><a href="#aman" class="hover:text-white">Keamanan</a></li>
+        <li><a href="#faq" class="hover:text-white">FAQ</a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="mx-auto max-w-7xl border-t border-white/10 px-5 py-6 text-xs text-[var(--muted)]">
+    <p>© 2026 PIXOGAMEONLINE. All rights reserved.</p>
+    <p class="mt-2">Nama game dan mata uang dalam game adalah milik publisher masing-masing. PIXOGAMEONLINE tidak berafiliasi dengan publisher mana pun.</p>
+  </div>
+</footer>
+
+
+</body></html>

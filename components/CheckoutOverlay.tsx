@@ -1,0 +1,127 @@
+"use client";
+
+import { useEffect, useState } from "react";
+import { formatRupiah } from "@/lib/format";
+
+export interface CheckoutOrder {
+  game: string;
+  userId: string;
+  nominalLabel: string;
+  price: number;
+  total: number;
+  orderId: string;
+  qrisUrl?: string;
+}
+
+interface CheckoutOverlayProps {
+  order: CheckoutOrder;
+  onClose: () => void;
+}
+
+type Step = "pay" | "done";
+
+export function CheckoutOverlay({ order, onClose }: CheckoutOverlayProps) {
+  const [step, setStep] = useState<Step>("pay");
+  const [deliverMsg, setDeliverMsg] = useState("Mengirim item… estimasi < 60 detik");
+
+  useEffect(() => {
+    if (step !== "pay") return;
+    const onKey = (e: KeyboardEvent) => { if (e.key === "Escape") onClose(); };
+    document.addEventListener("keydown", onKey);
+    return () => document.removeEventListener("keydown", onKey);
+  }, [step, onClose]);
+
+  useEffect(() => {
+    if (step === "pay") {
+      document.body.style.overflow = "hidden";
+      return () => { document.body.style.overflow = ""; };
+    }
+  }, [step]);
+
+  const handlePaid = () => {
+    setStep("done");
+    setDeliverMsg("Mengirim item… estimasi < 60 detik");
+    window.setTimeout(() => setDeliverMsg("Item sedang diproses. Cek game dalam beberapa detik."), 3200);
+  };
+
+  return (
+    <div className="fixed inset-0 z-[120] grid place-items-center p-5" style={{ background: "rgba(4,8,22,.7)" }}>
+      <div className="absolute inset-0" onClick={onClose} />
+      <div className="relative max-w-[400px] w-full p-7 text-center border border-white/10 shadow-2xl rounded-[28px] card">
+        {step === "pay" && (
+          <div>
+            <div className="flex items-start justify-between gap-4 mb-5">
+              <div className="text-left">
+                <p className="text-[11px] uppercase tracking-[.15em] text-[var(--muted)]">Pembayaran</p>
+                <h3 className="display mt-1 text-xl font-extrabold">Scan QRIS</h3>
+              </div>
+              <button type="button" onClick={onClose} className="text-[var(--muted)] hover:text-white text-xl leading-none">&times;</button>
+            </div>
+
+            <div className="flex items-center gap-3 rounded-2xl px-4 py-3 bg-white/[.04] border border-white/10">
+              <div className="flex-1 text-left">
+                <p className="text-[11px] text-[var(--muted)] uppercase tracking-[.15em]">Scan dengan e-wallet / m-banking</p>
+                <p className="display text-sm font-bold mt-0.5">Satu QR untuk semua pembayaran</p>
+              </div>
+              <span className="flex items-center gap-2 text-[11px] text-emerald-400"><span className="pulse-dot" /> Menunggu</span>
+            </div>
+
+            <div className="mt-5 qr-frame">
+              <div className="flex items-center gap-2 self-start">
+                <span className="display text-[13px] font-extrabold tracking-tight text-[#0b0b0c]">QRIS</span>
+                <span className="text-[9px] text-[#0b0b0c]/50 uppercase tracking-[.18em]">PIXOGAMEONLINE</span>
+              </div>
+              {order.qrisUrl ? (
+                <div className="flex justify-center">
+                  {/* eslint-disable-next-line @next/next/no-img-element */}
+                  <img src={order.qrisUrl} alt="QRIS PIXOGAMEONLINE" width={190} height={190} style={{ width: "min(58vw, 190px)", height: "auto", borderRadius: 6, objectFit: "contain" }} />
+                </div>
+              ) : (
+                <div className="grid h-[190px] w-[190px] place-items-center rounded-md bg-[#f4f4f2]">
+                  <p className="text-xs font-semibold text-[#0b0b0c]/45 max-w-[120px]">QRIS belum diatur admin. Hubungi admin untuk pembayaran manual.</p>
+                </div>
+              )}
+              <p className="text-[10px] text-[#0b0b0c]/55 pb-1 text-center">Satu QR untuk semua e-wallet &amp; m-banking</p>
+            </div>
+
+            <div className="mt-5 space-y-2.5 text-sm text-left">
+              <div className="flex justify-between"><span className="text-[var(--muted)]">Game</span><span className="font-semibold text-white">{order.game}</span></div>
+              <div className="flex justify-between"><span className="text-[var(--muted)]">User ID</span><span className="font-semibold text-white">{order.userId}</span></div>
+              <div className="flex justify-between"><span className="text-[var(--muted)]">Paket</span><span className="font-semibold text-white">{order.nominalLabel} · {formatRupiah(order.price)}</span></div>
+              <div className="flex justify-between"><span className="text-[var(--muted)]">Order ID</span><span className="text-xs font-mono text-[var(--muted)]">{order.orderId}</span></div>
+              <div className="border-t border-white/10 pt-3 flex justify-between items-center"><span className="text-[var(--muted)]">Total</span><span className="display text-xl font-extrabold grad">{formatRupiah(order.total)}</span></div>
+            </div>
+
+            <button type="button" onClick={handlePaid} className="btn-primary w-full mt-5 rounded-full px-6 py-4 text-sm font-bold text-[#0a1024]">
+              Saya Sudah Bayar
+            </button>
+            <button type="button" onClick={onClose} className="w-full text-xs text-[var(--muted)] hover:text-white transition mt-3">
+              Batalkan pesanan
+            </button>
+          </div>
+        )}
+
+        {step === "done" && (
+          <div className="py-2">
+            <div className="mx-auto w-20 h-20 rounded-full flex items-center justify-center bg-emerald-400/10 border border-emerald-400/35">
+              <svg width="34" height="34" viewBox="0 0 24 24" fill="none" stroke="#34d399" strokeWidth="2.4" strokeLinecap="round" strokeLinejoin="round"><path d="M20 6 9 17l-5-5" /></svg>
+            </div>
+            <h3 className="display mt-6 text-2xl font-extrabold">Pembayaran berhasil</h3>
+            <p className="text-[var(--muted)] text-sm mt-2">Terima kasih! Item sedang dikirim ke akunmu.</p>
+            <div className="mt-6 rounded-2xl p-4 text-left space-y-2.5 text-sm bg-white/[.04] border border-white/10">
+              <div className="flex justify-between"><span className="text-[var(--muted)]">Order ID</span><span className="text-xs font-mono text-[var(--muted)]">{order.orderId}</span></div>
+              <div className="flex justify-between"><span className="text-[var(--muted)]">Game</span><span className="font-semibold text-white">{order.game}</span></div>
+              <div className="flex justify-between"><span className="text-[var(--muted)]">User ID</span><span className="font-semibold text-white">{order.userId}</span></div>
+              <div className="flex justify-between"><span className="text-[var(--muted)]">Paket</span><span className="font-semibold text-white">{order.nominalLabel}</span></div>
+              <div className="border-t border-white/10 pt-2.5 flex justify-between"><span className="text-[var(--muted)]">Dibayar</span><span className="grad display font-extrabold">{formatRupiah(order.total)}</span></div>
+            </div>
+            <div className="mt-5 flex items-center justify-center gap-2 text-xs text-emerald-400"><span className="pulse-dot" /> {deliverMsg}</div>
+            <button type="button" onClick={onClose} className="btn-primary w-full mt-5 rounded-full px-6 py-4 text-sm font-bold text-[#0a1024]">
+              Selesai
+            </button>
+          </div>
+        )}
+      </div>
+    </div>
+  );
+}
