@@ -38,7 +38,6 @@ export function GameOrderForm({
 }: GameOrderFormProps) {
   const [price, setPrice] = useState(0);
   const [item, setItem] = useState<string | null>(null);
-  const [pay, setPay] = useState<string | null>(null);
   const [uid, setUid] = useState("");
   const [zid, setZid] = useState("");
   const [checkoutOpen, setCheckoutOpen] = useState(false);
@@ -53,8 +52,8 @@ export function GameOrderForm({
   };
 
   const handlePay = () => {
-    if (!uid.trim() || !item || !pay) {
-      alert("Lengkapi User ID, nominal, dan metode pembayaran dulu ya.");
+    if (!uid.trim() || !item) {
+      alert("Lengkapi User ID dan nominal dulu ya.");
       return;
     }
     setOrderId("PIXO-" + Date.now().toString(36).toUpperCase());
@@ -162,31 +161,6 @@ export function GameOrderForm({
               </>
             )}
           </section>
-
-          {/* STEP 3 */}
-          <section className="card mt-6 rounded-3xl p-7">
-            <div className="flex items-center gap-3">
-              <span className="grid h-8 w-8 place-items-center rounded-full bg-[#ffc24b] text-sm font-extrabold text-[#0a1024]">3</span>
-              <h2 className="text-xl font-bold">Pilih Metode Pembayaran</h2>
-            </div>
-            <div className="mt-6 grid gap-3 sm:grid-cols-3">
-              {[
-                { key: "QRIS", label: "QRIS", sub: "Semua e-wallet & m-banking" },
-                { key: "E-Wallet", label: "E-Wallet", sub: "GoPay · OVO · DANA · ShopeePay" },
-                { key: "Transfer Bank", label: "Transfer Bank", sub: "BCA · BRI · Mandiri · BNI" },
-              ].map((m) => (
-                <button
-                  key={m.key}
-                  type="button"
-                  className={`pay field rounded-2xl px-4 py-4 text-left transition ${pay === m.key ? "is-active" : ""}`}
-                  onClick={() => setPay(m.key)}
-                >
-                  <p className="font-bold">{m.label}</p>
-                  <p className="mt-1 text-xs text-[var(--muted)]">{m.sub}</p>
-                </button>
-              ))}
-            </div>
-          </section>
         </div>
 
         {/* RINGKASAN */}
@@ -197,7 +171,7 @@ export function GameOrderForm({
               <div className="flex justify-between gap-4"><dt className="text-[var(--muted)]">Produk</dt><dd className="text-right font-semibold">{gameName}</dd></div>
               <div className="flex justify-between gap-4"><dt className="text-[var(--muted)]">{userIdLabel}</dt><dd className={`text-right font-semibold ${uidOut ? "text-white" : "text-white/50"}`}>{uidDisplay}</dd></div>
               <div className="flex justify-between gap-4"><dt className="text-[var(--muted)]">Nominal</dt><dd className={`text-right font-semibold ${item ? "text-white" : "text-white/50"}`}>{item ?? "Belum dipilih"}</dd></div>
-              <div className="flex justify-between gap-4"><dt className="text-[var(--muted)]">Pembayaran</dt><dd className={`text-right font-semibold ${pay ? "text-white" : "text-white/50"}`}>{pay ?? "Belum dipilih"}</dd></div>
+              <div className="flex justify-between gap-4"><dt className="text-[var(--muted)]">Pembayaran</dt><dd className="text-right font-semibold text-white">QRIS</dd></div>
             </dl>
             <div className="mt-6 border-t border-white/10 pt-5">
               <div className="flex items-end justify-between">
