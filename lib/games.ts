@@ -13,6 +13,7 @@ export interface StaticGame {
   tag?: string;
   heading: string;
   copy: string;
+  metaDescription?: string;
   hint: string;
   server: boolean;
   serverLabel?: string;

@@ -1,11 +1,11 @@
 export const site = {
   name: "PIXOGAMEONLINE",
   description:
-    "Top up Mobile Legends, Free Fire, PUBG Mobile, COD Mobile, dan Magic Chess Go Go. Tanpa password, tanpa login akun, proses otomatis.",
+    "PIXOGAMEONLINE: Tempat top up game dengan proses simpel dan praktis. Isi ulang diamond dan kredit game favoritmu tanpa harus melakukan registrasi atau login. Cukup pilih game, masukkan User ID, tentukan nominal, lalu lakukan pembayaran. Pesanan diproses dengan cepat sehingga kamu bisa segera mendapatkan kredit game dan kembali bermain.",
   shortDescription:
-    "Top up game instan untuk gamer Indonesia. Cukup User ID, item langsung masuk. QRIS, e-wallet & transfer bank.",
+    "Top up game simpel dan praktis tanpa registrasi atau login. Cukup User ID, bayar, kredit game masuk dengan cepat.",
   url: "https://pixogameonline.example.com",
   locale: "id_ID",
   themeColor: "#0a1024",
-  ogImage: "/favicon.svg",
+  ogImage: "/og.png",
 } as const;

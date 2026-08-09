@@ -1,9 +1,60 @@
 import Link from "next/link";
+import type { Metadata } from "next";
 import { Nav } from "@/components/Nav";
 import { FooterCompact } from "@/components/Footer";
 import { getGameBySlug, getQrisUrl } from "@/lib/db";
 import { GAMES, getGame as getStaticGame } from "@/lib/games";
 import { GameOrderForm } from "@/components/GameOrderForm";
+import { site } from "@/lib/site";
+
+export async function generateMetadata({ params }: { params: Promise<{ slug: string }> }): Promise<Metadata> {
+  const { slug } = await params;
+  const staticGame = getStaticGame(slug);
+
+  let dbGame: Awaited<ReturnType<typeof getGameBySlug>> = null;
+  try {
+    dbGame = await getGameBySlug(slug);
+  } catch {
+    dbGame = null;
+  }
+
+  const g = dbGame ?? staticGame;
+  if (!g) {
+    return {
+      title: "Game Tidak Ditemukan",
+      description: site.description,
+    };
+  }
+
+  const name = g.name;
+  const url = `${site.url}/top-up/${slug}`;
+  const title = `Top Up ${name} — ${site.name}`;
+  const description =
+    staticGame?.metaDescription ??
+    `Top up ${name} di ${site.name} tanpa registrasi atau login. Masukkan User ID, pilih nominal, bayar, dan kredit game masuk dengan cepat.`;
+
+  return {
+    title,
+    description,
+    alternates: { canonical: url },
+    openGraph: {
+      type: "website",
+      url,
+      siteName: site.name,
+      locale: site.locale,
+      title,
+      description,
+      images: [{ url: site.ogImage, width: 1200, height: 630, alt: site.name }],
+    },
+    twitter: {
+      card: "summary_large_image",
+      title,
+      description,
+      images: [site.ogImage],
+    },
+    robots: { index: true, follow: true },
+  };
+}
 
 export default async function TopUpPage({ params }: { params: Promise<{ slug: string }> }) {
   const { slug } = await params;
@@ -50,8 +101,79 @@ export default async function TopUpPage({ params }: { params: Promise<{ slug: st
 
   const otherGames = GAMES.filter((x) => x.slug !== slug);
 
+  const pageUrl = `${site.url}/top-up/${slug}`;
+  const jsonLd = {
+    "@context": "https://schema.org",
+    "@graph": [
+      {
+        "@type": "Product",
+        "@id": `${pageUrl}#product`,
+        name: `Top Up ${gameName}`,
+        description: staticGame?.copy ?? `Top up ${gameName} ke User ID kamu, tanpa login akun.`,
+        image: `${site.url}${site.ogImage}`,
+        url: pageUrl,
+        brand: { "@type": "Brand", name: site.name },
+        offers: {
+          "@type": "AggregateOffer",
+          priceCurrency: "IDR",
+          lowPrice: nominals.length > 0 ? Math.min(...nominals.map((n) => n.price)) : undefined,
+          highPrice: nominals.length > 0 ? Math.max(...nominals.map((n) => n.price)) : undefined,
+          availability: "https://schema.org/InStock",
+          offers: nominals.map((n) => ({
+            "@type": "Offer",
+            name: `${n.label} — ${gameName}`,
+            price: n.price,
+            priceCurrency: "IDR",
+            availability: "https://schema.org/InStock",
+            url: pageUrl,
+          })),
+        },
+      },
+      {
+        "@type": "BreadcrumbList",
+        "@id": `${pageUrl}#breadcrumb`,
+        itemListElement: [
+          { "@type": "ListItem", position: 1, name: "Beranda", item: site.url },
+          { "@type": "ListItem", position: 2, name: "Top Up", item: `${site.url}/#game` },
+          { "@type": "ListItem", position: 3, name: gameName, item: pageUrl },
+        ],
+      },
+      {
+        "@type": "FAQPage",
+        "@id": `${pageUrl}#faq`,
+        mainEntity: [
+          {
+            "@type": "Question",
+            name: `Bagaimana cara top up ${gameName} di ${site.name}?`,
+            acceptedAnswer: {
+              "@type": "Answer",
+              text: "Pilih game, masukkan User ID (dan Zone ID bila diperlukan), pilih nominal, lalu lanjutkan ke pembayaran. Pesanan diproses otomatis.",
+            },
+          },
+          {
+            "@type": "Question",
+            name: `Apakah top up ${gameName} butuh password akun?`,
+            acceptedAnswer: {
+              "@type": "Answer",
+              text: "Tidak. PIXOGAMEONLINE tidak meminta password, OTP, PIN, maupun akses login ke akun game.",
+            },
+          },
+          {
+            "@type": "Question",
+            name: `Berapa lama proses top up ${gameName}?`,
+            acceptedAnswer: {
+              "@type": "Answer",
+              text: "Pesanan diproses otomatis setelah pembayaran terkonfirmasi, rata-rata di bawah 60 detik.",
+            },
+          },
+        ],
+      },
+    ],
+  };
+
   return (
     <>
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }} />
       <Nav />
 
       {/* BREADCRUMB */}

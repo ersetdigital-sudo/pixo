@@ -1,0 +1,17 @@
+{
+  "name": "PIXOGAMEONLINE",
+  "short_name": "PIXOGAMEONLINE",
+  "description": "Top up game simpel dan praktis tanpa registrasi atau login.",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#0a1024",
+  "theme_color": "#0a1024",
+  "icons": [
+    {
+      "src": "/favicon.svg",
+      "sizes": "any",
+      "type": "image/svg+xml",
+      "purpose": "any maskable"
+    }
+  ]
+}

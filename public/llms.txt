@@ -1,0 +1,20 @@
+# PIXOGAMEONLINE
+
+> PIXOGAMEONLINE: Tempat top up game dengan proses simpel dan praktis. Isi ulang diamond dan kredit game favoritmu tanpa harus melakukan registrasi atau login. Cukup pilih game, masukkan User ID, tentukan nominal, lalu lakukan pembayaran. Pesanan diproses dengan cepat sehingga kamu bisa segera mendapatkan kredit game dan kembali bermain.
+
+## Pages
+
+- [Beranda](https://pixogameonline.example.com/): Halaman utama PIXOGAMEONLINE dengan katalog game, cara top up, dan FAQ.
+- [Top Up Mobile Legends](https://pixogameonline.example.com/top-up/mobile-legends): Top up Diamond Mobile Legends dengan User ID + Zone ID.
+- [Top Up Free Fire](https://pixogameonline.example.com/top-up/free-fire): Top up Diamond Free Fire dengan User ID.
+- [Top Up PUBG Mobile](https://pixogameonline.example.com/top-up/pubg-mobile): Top up UC PUBG Mobile dengan User ID.
+- [Top Up Call of Duty: Mobile](https://pixogameonline.example.com/top-up/call-of-duty-mobile): Top up CP Call of Duty: Mobile dengan User ID.
+- [Top Up Magic Chess: Go Go](https://pixogameonline.example.com/top-up/magic-chess-go-go): Top up Diamond & Pass Magic Chess: Go Go dengan User ID + Zone ID.
+
+## Key Facts
+
+- Proses top up tanpa registrasi dan tanpa login akun game.
+- Cukup masukkan User ID (dan Zone ID bila diperlukan), pilih nominal, lalu bayar.
+- Pembayaran via QRIS, e-wallet, dan transfer bank.
+- Pesanan diproses otomatis dengan cepat (rata-rata di bawah 60 detik).
+- Game yang didukung: Mobile Legends, Free Fire, PUBG Mobile, Call of Duty: Mobile, Magic Chess: Go Go.

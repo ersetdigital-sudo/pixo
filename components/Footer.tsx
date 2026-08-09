@@ -6,7 +6,7 @@ export function Footer() {
       <div className="mx-auto grid max-w-7xl gap-10 px-5 py-14 md:grid-cols-3">
         <div>
           <span className="display text-lg font-extrabold">PIXOGAMEONLINE</span>
-          <p className="mt-3 max-w-xs text-sm text-[var(--muted)]">Top up game cepat, aman, dan transparan untuk gamer Indonesia. Cukup User ID, item langsung masuk.</p>
+          <p className="mt-3 max-w-xs text-sm text-[var(--muted)]">Tempat top up game dengan proses simpel dan praktis. Isi ulang diamond dan kredit game favoritmu tanpa registrasi atau login — pilih game, masukkan User ID, tentukan nominal, bayar, dan pesanan diproses dengan cepat.</p>
         </div>
         <div>
           <h4 className="text-sm font-bold">Game</h4>
@@ -42,7 +42,7 @@ export function FooterCompact() {
       <div className="mx-auto grid max-w-7xl gap-10 px-5 py-14 md:grid-cols-3">
         <div>
           <span className="display text-lg font-extrabold">PIXOGAMEONLINE</span>
-          <p className="mt-3 max-w-xs text-sm text-[var(--muted)]">Top up game cepat, aman, dan transparan untuk gamer Indonesia.</p>
+          <p className="mt-3 max-w-xs text-sm text-[var(--muted)]">Tempat top up game dengan proses simpel dan praktis. Isi ulang diamond dan kredit game favoritmu tanpa registrasi atau login — pilih game, masukkan User ID, tentukan nominal, bayar, dan pesanan diproses dengan cepat.</p>
         </div>
         <div>
           <h4 className="text-sm font-bold">Game</h4>

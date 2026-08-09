@@ -5,6 +5,7 @@ import { LogoHex } from "@/components/ui/LogoMark";
 import { getActiveGames } from "@/lib/db";
 import { GAMES, minPriceOf, type StaticGame } from "@/lib/games";
 import { formatRupiah } from "@/lib/format";
+import { site } from "@/lib/site";
 import type { DbGameWithNominals } from "@/types/game";
 
 interface CardGame {
@@ -59,8 +60,46 @@ export default async function HomePage() {
     "magic-chess-go-go": "Diamond & Pass buat push rank commander kamu.",
   };
 
+  const faqs = [
+    { q: "Bagaimana cara top up game di PIXOGAMEONLINE?", a: "Pilih game, masukkan User ID (dan Zone ID bila diperlukan), pilih nominal, lalu lanjutkan ke pembayaran." },
+    { q: "Apakah top up membutuhkan password?", a: "Tidak. PIXOGAMEONLINE tidak meminta password, OTP, PIN, maupun akses login ke akun game." },
+    { q: "Di mana saya menemukan User ID?", a: "User ID ada di halaman profil dalam game. Buka menu profil atau akun, lalu salin angka ID yang tertera." },
+    { q: "Apakah Zone ID diperlukan?", a: "Hanya untuk Mobile Legends dan Magic Chess Go Go. Zone ID ditulis di dalam tanda kurung setelah User ID." },
+    { q: "Berapa lama proses top up?", a: "Pesanan diproses otomatis setelah pembayaran terkonfirmasi. Bila ada antrean dari sisi penyedia, prosesnya bisa lebih lama." },
+    { q: "Apa yang harus dilakukan jika salah memasukkan User ID?", a: "Hubungi support secepatnya dengan bukti pesanan. Item yang sudah masuk ke ID lain tidak bisa ditarik kembali, jadi pastikan ID benar sebelum bayar." },
+    { q: "Apakah pembayaran bisa menggunakan QRIS?", a: "Ya. QRIS termasuk metode yang didukung, bersama e-wallet dan transfer bank." },
+    { q: "Game apa saja yang tersedia di PIXOGAMEONLINE?", a: "Mobile Legends, Free Fire, PUBG Mobile, Call of Duty Mobile, dan Magic Chess Go Go." },
+  ];
+
+  const jsonLd = {
+    "@context": "https://schema.org",
+    "@graph": [
+      {
+        "@type": "ItemList",
+        "@id": `${site.url}/#games`,
+        name: "Game Top Up",
+        itemListElement: games.map((g, i) => ({
+          "@type": "ListItem",
+          position: i + 1,
+          name: `Top Up ${g.name}`,
+          url: `${site.url}/top-up/${g.slug}`,
+        })),
+      },
+      {
+        "@type": "FAQPage",
+        "@id": `${site.url}/#faq`,
+        mainEntity: faqs.map((f) => ({
+          "@type": "Question",
+          name: f.q,
+          acceptedAnswer: { "@type": "Answer", text: f.a },
+        })),
+      },
+    ],
+  };
+
   return (
     <>
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }} />
       <Nav />
 
       {/* HERO */}

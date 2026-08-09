@@ -10,6 +10,7 @@ export function Nav() {
           <span className="display text-lg font-extrabold tracking-tight">PIXOGAMEONLINE</span>
         </Link>
         <nav className="hidden items-center gap-8 text-sm text-[var(--muted)] md:flex">
+          <Link href="/" className="transition hover:text-white">Home</Link>
           <Link href="/#game" className="transition hover:text-white">Game</Link>
           <Link href="/#cara" className="transition hover:text-white">Cara Top Up</Link>
           <Link href="/#aman" className="transition hover:text-white">Keamanan</Link>
