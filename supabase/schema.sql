@@ -94,8 +94,10 @@ create policy "settings public read"
   on public.settings for select to anon, authenticated using (true);
 
 -- Hanya user yang terdaftar di admin_users yang bisa menulis
+-- SECURITY DEFINER: wajib, agar is_admin() tidak memicu rekursi RLS
+-- (policy admin_users memanggil is_admin(), dan is_admin() membaca admin_users).
 create or replace function public.is_admin()
-returns boolean language sql stable as $$
+returns boolean language sql stable security definer set search_path = public as $$
   select exists (
     select 1 from public.admin_users au
     where au.user_id = auth.uid()

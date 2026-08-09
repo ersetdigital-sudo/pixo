@@ -4,12 +4,12 @@
 
 ## Pages
 
-- [Beranda](https://pixogameonline.example.com/): Halaman utama PIXOGAMEONLINE dengan katalog game, cara top up, dan FAQ.
-- [Top Up Mobile Legends](https://pixogameonline.example.com/top-up/mobile-legends): Top up Diamond Mobile Legends dengan User ID + Zone ID.
-- [Top Up Free Fire](https://pixogameonline.example.com/top-up/free-fire): Top up Diamond Free Fire dengan User ID.
-- [Top Up PUBG Mobile](https://pixogameonline.example.com/top-up/pubg-mobile): Top up UC PUBG Mobile dengan User ID.
-- [Top Up Call of Duty: Mobile](https://pixogameonline.example.com/top-up/call-of-duty-mobile): Top up CP Call of Duty: Mobile dengan User ID.
-- [Top Up Magic Chess: Go Go](https://pixogameonline.example.com/top-up/magic-chess-go-go): Top up Diamond & Pass Magic Chess: Go Go dengan User ID + Zone ID.
+- [Beranda](https://pixogameonline.net/): Halaman utama PIXOGAMEONLINE dengan katalog game, cara top up, dan FAQ.
+- [Top Up Mobile Legends](https://pixogameonline.net/top-up/mobile-legends): Top up Diamond Mobile Legends dengan User ID + Zone ID.
+- [Top Up Free Fire](https://pixogameonline.net/top-up/free-fire): Top up Diamond Free Fire dengan User ID.
+- [Top Up PUBG Mobile](https://pixogameonline.net/top-up/pubg-mobile): Top up UC PUBG Mobile dengan User ID.
+- [Top Up Call of Duty: Mobile](https://pixogameonline.net/top-up/call-of-duty-mobile): Top up CP Call of Duty: Mobile dengan User ID.
+- [Top Up Magic Chess: Go Go](https://pixogameonline.net/top-up/magic-chess-go-go): Top up Diamond & Pass Magic Chess: Go Go dengan User ID + Zone ID.
 
 ## Key Facts
 
