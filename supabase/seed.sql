@@ -142,7 +142,7 @@ insert into settings (key, value)
 values ('qris_image_url', '{}'::jsonb)
 on conflict (key) do nothing;
 
--- Whitelist email admin (GANTI dengan email yang kamu pakai untuk login /admin)
+-- Whitelist email admin (GANTI sesuai kebutuhan)
 insert into settings (key, value)
-values ('admin_emails', '["admin@pixogameonline.com"]')
+values ('admin_emails', '["pixogameonline@gmail.com"]')
 on conflict (key) do nothing;

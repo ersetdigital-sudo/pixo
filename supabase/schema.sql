@@ -41,7 +41,7 @@ create table if not exists public.settings (
 
 create table if not exists public.admin_users (
   id uuid primary key default gen_random_uuid(),
-  user_id uuid not null references auth.users(id) on delete cascade,
+  user_id uuid not null unique references auth.users(id) on delete cascade,
   email text not null,
   created_at timestamptz not null default now()
 );
@@ -121,7 +121,7 @@ create policy "admin_users self read"
 -- Otomatis daftarkan user Supabase sebagai admin bila emailnya ada di whitelist
 -- settings key 'admin_emails' (array jsonb, contoh: ["admin@example.com"])
 create or replace function public.handle_new_admin()
-returns trigger language plpgsql as $$
+returns trigger language plpgsql security definer set search_path = public as $$
 begin
   if exists (
     select 1 from public.settings s
