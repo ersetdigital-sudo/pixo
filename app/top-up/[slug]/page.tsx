@@ -28,7 +28,7 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
 
   const name = g.name;
   const url = `${site.url}/top-up/${slug}`;
-  const title = `Top Up ${name} — ${site.name}`;
+  const title = `Top Up ${name}`;
   const description =
     staticGame?.metaDescription ??
     `Top up ${name} di ${site.name} tanpa registrasi atau login. Masukkan User ID, pilih nominal, bayar, dan kredit game masuk dengan cepat.`;
