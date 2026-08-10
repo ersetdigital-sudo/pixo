@@ -102,6 +102,15 @@
     background: var(--color-bg);
   }
 
+  select {
+    color-scheme: dark;
+  }
+
+  select option {
+    background-color: #141d3d;
+    color: #f3f6ff;
+  }
+
   body {
     background: var(--color-bg);
     color: var(--color-ink);
