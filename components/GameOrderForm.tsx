@@ -84,14 +84,27 @@ export function GameOrderForm({
           <button
             key={n.label}
             type="button"
-            className={`pkg relative rounded-2xl p-4 text-left ${item === n.label ? "is-active" : ""}`}
+            className={`pkg relative overflow-hidden rounded-2xl text-left ${item === n.label ? "is-active" : ""}`}
             onClick={() => selectItem(n.label, n.price)}
           >
             {badge && (
-              <span className={`absolute right-2.5 top-2.5 rounded-full px-2 py-0.5 text-[9px] font-bold ${badge === "Terlaris" ? "bg-[#ff6a2c]/25 text-[#ffc24b]" : "bg-[#4c8dff]/25 text-[#9dc0ff]"}`}>{badge}</span>
+              <span
+                className={`flex items-center justify-center gap-1 py-1 text-[10px] font-extrabold uppercase tracking-[.14em] ${
+                  badge === "Terlaris"
+                    ? "bg-gradient-to-r from-[#ffc24b] to-[#ff8a2e] text-[#0a1024]"
+                    : "bg-gradient-to-r from-[#6ea2ff] to-[#4c8dff] text-white"
+                }`}
+              >
+                <svg viewBox="0 0 20 20" className="h-3 w-3" fill="currentColor">
+                  <path d="M10 1.5 12.2 6l5 .6-3.7 3.4 1 4.9L10 12.2l-4.5 2.7 1-4.9L2.8 6.6l5-.6z" />
+                </svg>
+                {badge}
+              </span>
             )}
-            <p className={`display font-bold ${compact ? "text-base" : "text-lg"}`}>{n.label}</p>
-            <p className={`mt-1 text-[var(--muted)] ${compact ? "text-xs" : "text-sm"}`}>{formatRupiah(n.price)}</p>
+            <div className={badge ? "p-3.5 pt-2.5" : "p-4"}>
+              <p className={`display font-bold ${compact ? "text-base" : "text-lg"}`}>{n.label}</p>
+              <p className={`mt-1 text-[var(--muted)] ${compact ? "text-xs" : "text-sm"}`}>{formatRupiah(n.price)}</p>
+            </div>
           </button>
         );
       })}
