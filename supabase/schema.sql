@@ -28,6 +28,7 @@ create table if not exists public.pricing (
   game_id uuid not null references public.games(id) on delete cascade,
   nominal_label text not null,
   price integer not null check (price > 0),
+  category text not null default 'nominal' check (category in ('nominal', 'pass')),
   sort_order integer not null default 0,
   created_at timestamptz not null default now(),
   updated_at timestamptz not null default now()

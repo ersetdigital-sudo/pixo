@@ -26,32 +26,32 @@ where not exists (select 1 from games where slug = 'magic-chess-go-go');
 -- ============ PRICING ============
 
 -- Mobile Legends
-insert into pricing (game_id, nominal_label, price, sort_order)
-select g.id, n.label, n.price, n.sort
+insert into pricing (game_id, nominal_label, price, sort_order, category)
+select g.id, n.label, n.price, n.sort, n.cat
 from games g
 cross join (values
-  ('5 Diamond', 1500, 1),
-  ('12 Diamond', 3400, 2),
-  ('28 Diamond', 7600, 3),
-  ('86 Diamond', 22000, 4),
-  ('172 Diamond', 43500, 5),
-  ('257 Diamond', 64500, 6),
-  ('344 Diamond', 86000, 7),
-  ('706 Diamond', 172000, 8),
-  ('2.195 Diamond', 515000, 9)
-) as n(label, price, sort)
+  ('5 Diamond', 1500, 1, 'nominal'),
+  ('12 Diamond', 3400, 2, 'nominal'),
+  ('28 Diamond', 7600, 3, 'nominal'),
+  ('86 Diamond', 22000, 4, 'nominal'),
+  ('172 Diamond', 43500, 5, 'nominal'),
+  ('257 Diamond', 64500, 6, 'nominal'),
+  ('344 Diamond', 86000, 7, 'nominal'),
+  ('706 Diamond', 172000, 8, 'nominal'),
+  ('2.195 Diamond', 515000, 9, 'nominal')
+) as n(label, price, sort, cat)
 where g.slug = 'mobile-legends'
 and not exists (select 1 from pricing p where p.game_id = g.id and p.nominal_label = n.label);
 
 -- Mobile Legends — Paket Spesial
-insert into pricing (game_id, nominal_label, price, sort_order)
-select g.id, n.label, n.price, n.sort
+insert into pricing (game_id, nominal_label, price, sort_order, category)
+select g.id, n.label, n.price, n.sort, n.cat
 from games g
 cross join (values
-  ('Weekly Diamond Pass', 27000, 10),
-  ('Twilight Pass', 145000, 11),
-  ('Starlight Member', 149000, 12)
-) as n(label, price, sort)
+  ('Weekly Diamond Pass', 27000, 10, 'pass'),
+  ('Twilight Pass', 145000, 11, 'pass'),
+  ('Starlight Member', 149000, 12, 'pass')
+) as n(label, price, sort, cat)
 where g.slug = 'mobile-legends'
 and not exists (select 1 from pricing p where p.game_id = g.id and p.nominal_label = n.label);
 
@@ -110,29 +110,29 @@ where g.slug = 'call-of-duty-mobile'
 and not exists (select 1 from pricing p where p.game_id = g.id and p.nominal_label = n.label);
 
 -- Magic Chess: Go Go
-insert into pricing (game_id, nominal_label, price, sort_order)
-select g.id, n.label, n.price, n.sort
+insert into pricing (game_id, nominal_label, price, sort_order, category)
+select g.id, n.label, n.price, n.sort, n.cat
 from games g
 cross join (values
-  ('16 Diamond', 4500, 1),
-  ('32 Diamond', 8500, 2),
-  ('64 Diamond', 16500, 3),
-  ('128 Diamond', 32500, 4),
-  ('256 Diamond', 64000, 5),
-  ('512 Diamond', 127000, 6)
-) as n(label, price, sort)
+  ('16 Diamond', 4500, 1, 'nominal'),
+  ('32 Diamond', 8500, 2, 'nominal'),
+  ('64 Diamond', 16500, 3, 'nominal'),
+  ('128 Diamond', 32500, 4, 'nominal'),
+  ('256 Diamond', 64000, 5, 'nominal'),
+  ('512 Diamond', 127000, 6, 'nominal')
+) as n(label, price, sort, cat)
 where g.slug = 'magic-chess-go-go'
 and not exists (select 1 from pricing p where p.game_id = g.id and p.nominal_label = n.label);
 
 -- Magic Chess — Paket Spesial
-insert into pricing (game_id, nominal_label, price, sort_order)
-select g.id, n.label, n.price, n.sort
+insert into pricing (game_id, nominal_label, price, sort_order, category)
+select g.id, n.label, n.price, n.sort, n.cat
 from games g
 cross join (values
-  ('Weekly Pass', 29000, 7),
-  ('Season Pass', 89000, 8),
-  ('Premium Pass', 159000, 9)
-) as n(label, price, sort)
+  ('Weekly Pass', 29000, 7, 'pass'),
+  ('Season Pass', 89000, 8, 'pass'),
+  ('Premium Pass', 159000, 9, 'pass')
+) as n(label, price, sort, cat)
 where g.slug = 'magic-chess-go-go'
 and not exists (select 1 from pricing p where p.game_id = g.id and p.nominal_label = n.label);
 

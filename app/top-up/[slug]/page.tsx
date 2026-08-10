@@ -92,11 +92,18 @@ export default async function TopUpPage({ params }: { params: Promise<{ slug: st
   const userIdPlaceholder = staticGame?.user_id_placeholder ?? game?.user_id_placeholder ?? "12345678";
   const hint = staticGame?.hint ?? "";
 
-  const nominals =
+  const dbItems =
     game && game.nominals.length > 0
-      ? game.nominals.map((n) => ({ label: n.nominal_label, price: n.price }))
+      ? game.nominals.map((n) => ({ label: n.nominal_label, price: n.price, category: n.category }))
+      : [];
+  const nominals =
+    dbItems.length > 0
+      ? dbItems.filter((n) => n.category !== "pass").map(({ label, price }) => ({ label, price }))
       : (staticGame?.nominals ?? []);
-  const passes = staticGame?.passes ?? [];
+  const passes =
+    dbItems.length > 0
+      ? dbItems.filter((n) => n.category === "pass").map(({ label, price }) => ({ label, price }))
+      : (staticGame?.passes ?? []);
   const qrisUrl = await getQrisUrl().catch(() => "");
 
   const otherGames = GAMES.filter((x) => x.slug !== slug);

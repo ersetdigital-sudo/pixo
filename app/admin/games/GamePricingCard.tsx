@@ -10,6 +10,7 @@ interface PricingItem {
   id: string;
   nominal_label: string;
   price: number;
+  category: string;
 }
 
 interface GameCardProps {
@@ -80,9 +81,11 @@ export function GamePricingCard({ game, nominals }: GameCardProps) {
   const [isActive, setIsActive] = useState(game.is_active);
   const [newLabel, setNewLabel] = useState("");
   const [newPrice, setNewPrice] = useState(0);
+  const [newCategory, setNewCategory] = useState("nominal");
   const [editing, setEditing] = useState<string | null>(null);
   const [editLabel, setEditLabel] = useState("");
   const [editPrice, setEditPrice] = useState(0);
+  const [editCategory, setEditCategory] = useState("nominal");
   const [loading, setLoading] = useState(false);
   const [deleteTarget, setDeleteTarget] = useState<PricingItem | null>(null);
 
@@ -101,13 +104,14 @@ export function GamePricingCard({ game, nominals }: GameCardProps) {
 
     setLoading(true);
     try {
-      await addPricing(game.id, label, newPrice);
-      setItems([...items, { id: "temp-" + Date.now(), nominal_label: label, price: newPrice }]);
+      await addPricing(game.id, label, newPrice, newCategory);
+      setItems([...items, { id: "temp-" + Date.now(), nominal_label: label, price: newPrice, category: newCategory }]);
       setNewLabel("");
       setNewPrice(0);
-      showToast("success", "Nominal berhasil ditambahkan.");
+      setNewCategory("nominal");
+      showToast("success", "Berhasil ditambahkan.");
     } catch (e: unknown) {
-      showToast("error", "Gagal menambah nominal: " + String(e));
+      showToast("error", "Gagal menambah: " + String(e));
     }
     setLoading(false);
   };
@@ -126,8 +130,8 @@ export function GamePricingCard({ game, nominals }: GameCardProps) {
 
     setLoading(true);
     try {
-      await updatePricing(id, label, editPrice);
-      setItems(items.map((i) => (i.id === id ? { ...i, nominal_label: label, price: editPrice } : i)));
+      await updatePricing(id, label, editPrice, editCategory);
+      setItems(items.map((i) => (i.id === id ? { ...i, nominal_label: label, price: editPrice, category: editCategory } : i)));
       setEditing(null);
       showToast("success", "Harga berhasil disimpan.");
     } catch (e: unknown) {
@@ -192,6 +196,14 @@ export function GamePricingCard({ game, nominals }: GameCardProps) {
                     onChange={(e) => setEditLabel(e.target.value)}
                     className={`flex-1 min-w-0 ${inputClass}`}
                   />
+                  <select
+                    value={editCategory}
+                    onChange={(e) => setEditCategory(e.target.value)}
+                    className={`shrink-0 ${inputClass}`}
+                  >
+                    <option value="nominal">Nominal</option>
+                    <option value="pass">Paket Spesial</option>
+                  </select>
                   <RupiahInput
                     value={editPrice}
                     onChange={setEditPrice}
@@ -216,7 +228,12 @@ export function GamePricingCard({ game, nominals }: GameCardProps) {
                 </>
               ) : (
                 <>
-                  <span className="flex-1 min-w-0 text-sm text-ink/70 truncate">{item.nominal_label}</span>
+                  <span className="flex-1 min-w-0 text-sm text-ink/70 truncate">
+                    {item.nominal_label}
+                    {item.category === "pass" && (
+                      <span className="ml-2 rounded-full bg-[#ffc24b]/15 px-2 py-0.5 text-[10px] font-bold text-[#ffc24b]">Paket Spesial</span>
+                    )}
+                  </span>
                   <span className="shrink-0 text-sm text-muted font-mono tabular-nums">
                     {formatRupiah(item.price)}
                   </span>
@@ -225,6 +242,7 @@ export function GamePricingCard({ game, nominals }: GameCardProps) {
                       setEditing(item.id);
                       setEditLabel(item.nominal_label);
                       setEditPrice(item.price);
+                      setEditCategory(item.category);
                     }}
                     disabled={loading}
                     className="shrink-0 w-9 h-9 flex items-center justify-center rounded-lg bg-paper-2 text-muted hover:text-[#ffc24b] hover:bg-[#ffc24b]/10 transition disabled:opacity-50"
@@ -247,13 +265,21 @@ export function GamePricingCard({ game, nominals }: GameCardProps) {
         </div>
 
         {/* Add form */}
-        <form onSubmit={handleAdd} className="flex gap-2 p-4 border-t border-line">
+        <form onSubmit={handleAdd} className="flex flex-wrap gap-2 p-4 border-t border-line">
+          <select
+            value={newCategory}
+            onChange={(e) => setNewCategory(e.target.value)}
+            className={`shrink-0 ${inputClass}`}
+          >
+            <option value="nominal">Nominal</option>
+            <option value="pass">Paket Spesial</option>
+          </select>
           <input
             value={newLabel}
             onChange={(e) => setNewLabel(e.target.value)}
             placeholder="Label (misal: 60 UC)"
             required
-            className={`flex-1 min-w-0 ${inputClass}`}
+            className={`flex-1 min-w-[140px] ${inputClass}`}
           />
           <RupiahInput
             value={newPrice}

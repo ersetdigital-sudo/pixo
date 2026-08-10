@@ -21,6 +21,7 @@ export interface DbNominal {
   game_id: string;
   nominal_label: string;
   price: number;
+  category: string;
   sort_order: number;
 }
 
