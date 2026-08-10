@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useState } from "react";
+import { useRouter } from "next/navigation";
 import { formatRupiah } from "@/lib/format";
 
 export interface CheckoutOrder {
@@ -24,6 +25,7 @@ type Step = "pay" | "done";
 const PAYMENT_SECONDS = 15 * 60;
 
 export function CheckoutOverlay({ order, onClose }: CheckoutOverlayProps) {
+  const router = useRouter();
   const [step, setStep] = useState<Step>("pay");
   const [deliverMsg, setDeliverMsg] = useState("Mengirim item… estimasi < 60 detik");
   const [secondsLeft, setSecondsLeft] = useState(PAYMENT_SECONDS);
@@ -33,6 +35,14 @@ export function CheckoutOverlay({ order, onClose }: CheckoutOverlayProps) {
     const t = window.setInterval(() => setSecondsLeft((s) => (s > 0 ? s - 1 : 0)), 1000);
     return () => window.clearInterval(t);
   }, [step]);
+
+  useEffect(() => {
+    if (step === "pay" && secondsLeft <= 0) {
+      setStep("done");
+      setDeliverMsg("Mengirim item… estimasi < 60 detik");
+      window.setTimeout(() => setDeliverMsg("Item sedang diproses. Cek game dalam beberapa detik."), 3200);
+    }
+  }, [secondsLeft, step]);
 
   useEffect(() => {
     if (step !== "pay") return;
@@ -48,19 +58,12 @@ export function CheckoutOverlay({ order, onClose }: CheckoutOverlayProps) {
     }
   }, [step]);
 
-  const expired = secondsLeft <= 0;
   const mm = String(Math.floor(secondsLeft / 60)).padStart(2, "0");
   const ss = String(secondsLeft % 60).padStart(2, "0");
   const fraction = secondsLeft / PAYMENT_SECONDS;
   const RADIUS = 30;
   const CIRCUMFERENCE = 2 * Math.PI * RADIUS;
-  const timerColor = expired || secondsLeft <= 60 ? "#f87171" : "#34d399";
-
-  const handlePaid = () => {
-    setStep("done");
-    setDeliverMsg("Mengirim item… estimasi < 60 detik");
-    window.setTimeout(() => setDeliverMsg("Item sedang diproses. Cek game dalam beberapa detik."), 3200);
-  };
+  const timerColor = secondsLeft <= 60 ? "#f87171" : "#34d399";
 
   const waDigits = (order.waNumber ?? "").replace(/^0/, "62").replace(/[^0-9]/g, "");
   const waMessage = encodeURIComponent(
@@ -138,27 +141,6 @@ export function CheckoutOverlay({ order, onClose }: CheckoutOverlayProps) {
               <div className="border-t border-white/10 pt-3 flex justify-between items-center"><span className="text-[var(--muted)]">Total</span><span className="display text-xl font-extrabold grad">{formatRupiah(order.total)}</span></div>
             </div>
 
-            {expired && (
-              <div className="mt-4 rounded-2xl border border-red-400/25 bg-red-400/10 p-4 text-left">
-                <p className="flex items-center gap-2 text-sm font-bold text-red-400">
-                  <svg viewBox="0 0 24 24" className="h-4 w-4" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round"><circle cx="12" cy="12" r="9"></circle><path d="M12 7v5l3 2"></path></svg>
-                  Waktu pembayaran habis
-                </p>
-                <p className="mt-1 text-[11px] leading-relaxed text-[var(--muted)]">QRIS tetap berlaku. Perpanjang waktu kalau masih mau lanjut bayar.</p>
-                <button
-                  type="button"
-                  onClick={() => setSecondsLeft(PAYMENT_SECONDS)}
-                  className="mt-3 w-full rounded-xl bg-red-400/15 py-2.5 text-xs font-bold text-red-400 transition hover:bg-red-400/25"
-                >
-                  Perpanjang 15 menit
-                </button>
-              </div>
-            )}
-
-            <button type="button" onClick={handlePaid} className="btn-primary w-full mt-5 rounded-full px-6 py-4 text-sm font-bold text-[#0a1024]">
-              Saya Sudah Bayar
-            </button>
-
             <div className="mt-4 rounded-2xl border border-emerald-400/20 bg-emerald-400/[.06] p-3.5 text-left">
               <p className="text-xs font-bold text-emerald-400">Sudah bayar tapi item belum masuk?</p>
               <p className="mt-0.5 text-[11px] leading-relaxed text-[var(--muted)]">
@@ -202,8 +184,8 @@ export function CheckoutOverlay({ order, onClose }: CheckoutOverlayProps) {
               <div className="border-t border-white/10 pt-2.5 flex justify-between"><span className="text-[var(--muted)]">Dibayar</span><span className="grad display font-extrabold">{formatRupiah(order.total)}</span></div>
             </div>
             <div className="mt-5 flex items-center justify-center gap-2 text-xs text-emerald-400"><span className="pulse-dot" /> {deliverMsg}</div>
-            <button type="button" onClick={onClose} className="btn-primary w-full mt-5 rounded-full px-6 py-4 text-sm font-bold text-[#0a1024]">
-              Selesai
+            <button type="button" onClick={() => router.push("/")} className="btn-primary w-full mt-5 rounded-full px-6 py-4 text-sm font-bold text-[#0a1024]">
+              Kembali ke Beranda
             </button>
           </div>
         )}
