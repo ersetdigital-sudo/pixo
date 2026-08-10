@@ -29,9 +29,18 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
   const name = g.name;
   const url = `${site.url}/top-up/${slug}`;
   const title = `Top Up ${name}`;
+
+  // Harga "mulai dari" diambil dari admin (DB pricing), fallback ke data statis
+  const dbPrices = (dbGame?.nominals ?? []).filter((n) => n.category !== "pass").map((n) => n.price);
+  const staticPrices = (staticGame?.nominals ?? []).map((n) => n.price);
+  const pricePool = dbPrices.length > 0 ? dbPrices : staticPrices;
+  const minPrice = pricePool.length > 0 ? Math.min(...pricePool) : 0;
+
   const description =
-    staticGame?.metaDescription ??
-    `Top up ${name} di ${site.name} tanpa registrasi atau login. Masukkan User ID, pilih nominal, bayar, dan kredit game masuk dengan cepat.`;
+    minPrice > 0
+      ? `Top up ${name} di ${site.name} mulai Rp${minPrice.toLocaleString("id-ID")}. Masukkan User ID, pilih nominal, bayar, dan kredit game masuk dengan cepat.`
+      : (staticGame?.metaDescription ??
+        `Top up ${name} di ${site.name} tanpa registrasi atau login. Masukkan User ID, pilih nominal, bayar, dan kredit game masuk dengan cepat.`);
 
   return {
     title,
