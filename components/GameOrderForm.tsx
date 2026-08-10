@@ -85,13 +85,15 @@ export function GameOrderForm({
                 className={`flex items-center justify-center gap-1 py-1 text-[10px] font-extrabold uppercase tracking-[.14em] ${
                   badge === "best_value"
                     ? "bg-gradient-to-r from-[#6ea2ff] to-[#4c8dff] text-white"
-                    : "bg-gradient-to-r from-[#ffc24b] to-[#ff8a2e] text-[#0a1024]"
+                    : badge === "hemat"
+                      ? "bg-gradient-to-r from-[#34d399] to-[#10b981] text-white"
+                      : "bg-gradient-to-r from-[#ffc24b] to-[#ff8a2e] text-[#0a1024]"
                 }`}
               >
                 <svg viewBox="0 0 20 20" className="h-3 w-3" fill="currentColor">
                   <path d="M10 1.5 12.2 6l5 .6-3.7 3.4 1 4.9L10 12.2l-4.5 2.7 1-4.9L2.8 6.6l5-.6z" />
                 </svg>
-                {badge === "best_value" ? "Best Value" : "Terlaris"}
+                {badge === "best_value" ? "Best Value" : badge === "hemat" ? "Hemat" : "Terlaris"}
               </span>
             )}
             <div className={badge ? "p-3.5 pt-2.5" : "p-4"}>

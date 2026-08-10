@@ -28,16 +28,20 @@ const BADGE_OPTIONS: Array<{ value: string; label: string }> = [
   { value: "", label: "Tanpa badge" },
   { value: "terlaris", label: "Terlaris" },
   { value: "best_value", label: "Best Value" },
+  { value: "hemat", label: "Hemat" },
 ];
 
 function BadgeChip({ badge }: { badge: string | null }) {
   if (!badge) return null;
-  const isBest = badge === "best_value";
+  const chipClass =
+    badge === "best_value"
+      ? "bg-[#4c8dff]/15 text-[#9dc0ff]"
+      : badge === "hemat"
+        ? "bg-emerald-400/15 text-emerald-400"
+        : "bg-[#ff6a2c]/15 text-[#ffc24b]";
   return (
-    <span className={`ml-2 inline-flex items-center gap-1 rounded-full px-2 py-0.5 text-[10px] font-bold ${
-      isBest ? "bg-[#4c8dff]/15 text-[#9dc0ff]" : "bg-[#ff6a2c]/15 text-[#ffc24b]"
-    }`}>
-      {badge === "terlaris" ? "Terlaris" : "Best Value"}
+    <span className={`ml-2 inline-flex items-center gap-1 rounded-full px-2 py-0.5 text-[10px] font-bold ${chipClass}`}>
+      {badge === "terlaris" ? "Terlaris" : badge === "best_value" ? "Best Value" : "Hemat"}
     </span>
   );
 }
