@@ -23,6 +23,7 @@ interface GameOrderFormProps {
   nominals: NominalItem[];
   passes: NominalItem[];
   qrisUrl: string;
+  waNumber?: string;
   gameLogo?: string;
   gameAlt?: string;
 }
@@ -39,6 +40,7 @@ export function GameOrderForm({
   nominals,
   passes,
   qrisUrl,
+  waNumber,
   gameLogo,
   gameAlt,
 }: GameOrderFormProps) {
@@ -356,6 +358,7 @@ export function GameOrderForm({
             total: price,
             orderId,
             qrisUrl,
+            waNumber,
           }}
           onClose={() => setCheckoutOpen(false)}
         />

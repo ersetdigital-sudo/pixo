@@ -2,7 +2,7 @@ import Link from "next/link";
 import type { Metadata } from "next";
 import { Nav } from "@/components/Nav";
 import { FooterCompact } from "@/components/Footer";
-import { getGameBySlug, getQrisUrl } from "@/lib/db";
+import { getGameBySlug, getQrisUrl, getWaNumber } from "@/lib/db";
 import { GAMES, getGame as getStaticGame } from "@/lib/games";
 import { GameOrderForm } from "@/components/GameOrderForm";
 import { site } from "@/lib/site";
@@ -114,6 +114,7 @@ export default async function TopUpPage({ params }: { params: Promise<{ slug: st
       ? dbItems.filter((n) => n.category === "pass").map(({ label, price, badge }) => ({ label, price, badge }))
       : (staticGame?.passes ?? []);
   const qrisUrl = await getQrisUrl().catch(() => "");
+  const waNumber = await getWaNumber().catch(() => "");
 
   const otherGames = GAMES.filter((x) => x.slug !== slug);
 
@@ -253,6 +254,7 @@ export default async function TopUpPage({ params }: { params: Promise<{ slug: st
         nominals={nominals}
         passes={passes}
         qrisUrl={qrisUrl}
+        waNumber={waNumber}
         gameLogo={staticGame?.logo}
         gameAlt={staticGame?.alt}
       />

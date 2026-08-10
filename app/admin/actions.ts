@@ -142,6 +142,35 @@ export async function updateQrisImage(url: string) {
   return { error: null };
 }
 
+export async function updateWaNumber(number: string) {
+  const supabase = await createSupabaseServerClient();
+
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  const { data: existing } = await (supabase.from("settings") as any)
+    .select("key")
+    .eq("key", "wa_number")
+    .single();
+
+  if (existing) {
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    const { error } = await (supabase.from("settings") as any)
+      .update({ value: number })
+      .eq("key", "wa_number");
+    if (error) return { error: error.message };
+  } else {
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    const { error } = await (supabase.from("settings") as any)
+      .insert({ key: "wa_number", value: number });
+    if (error) return { error: error.message };
+  }
+
+  revalidatePath("/admin/qris");
+  revalidatePath("/admin");
+  revalidatePath("/");
+  revalidatePath("/top-up");
+  return { error: null };
+}
+
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 let cloudinary: any = null;
 

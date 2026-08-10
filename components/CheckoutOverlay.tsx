@@ -11,6 +11,7 @@ export interface CheckoutOrder {
   total: number;
   orderId: string;
   qrisUrl?: string;
+  waNumber?: string;
 }
 
 interface CheckoutOverlayProps {
@@ -60,6 +61,12 @@ export function CheckoutOverlay({ order, onClose }: CheckoutOverlayProps) {
     setDeliverMsg("Mengirim item… estimasi < 60 detik");
     window.setTimeout(() => setDeliverMsg("Item sedang diproses. Cek game dalam beberapa detik."), 3200);
   };
+
+  const waDigits = (order.waNumber ?? "").replace(/^0/, "62").replace(/[^0-9]/g, "");
+  const waMessage = encodeURIComponent(
+    `Halo, saya ingin konfirmasi pembayaran.\n\nOrder ID: ${order.orderId}\nGame: ${order.game}\nUser ID: ${order.userId}\nPaket: ${order.nominalLabel}\nTotal: ${formatRupiah(order.total)}`
+  );
+  const waUrl = waDigits ? `https://wa.me/${waDigits}?text=${waMessage}` : "";
 
   return (
     <div className="fixed inset-0 z-[120] grid place-items-center p-5" style={{ background: "rgba(4,8,22,.7)" }}>
@@ -151,6 +158,29 @@ export function CheckoutOverlay({ order, onClose }: CheckoutOverlayProps) {
             <button type="button" onClick={handlePaid} className="btn-primary w-full mt-5 rounded-full px-6 py-4 text-sm font-bold text-[#0a1024]">
               Saya Sudah Bayar
             </button>
+
+            <div className="mt-4 rounded-2xl border border-emerald-400/20 bg-emerald-400/[.06] p-3.5 text-left">
+              <p className="text-xs font-bold text-emerald-400">Sudah bayar tapi item belum masuk?</p>
+              <p className="mt-0.5 text-[11px] leading-relaxed text-[var(--muted)]">
+                Klik di bawah untuk konfirmasi pembayaran via WhatsApp ke admin.
+              </p>
+              {waUrl ? (
+                <a
+                  href={waUrl}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="mt-2.5 flex items-center justify-center gap-2 w-full rounded-xl bg-emerald-400/15 py-2.5 text-xs font-bold text-emerald-400 transition hover:bg-emerald-400/25"
+                >
+                  <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor">
+                    <path d="M12 2a10 10 0 00-8.5 15.3L2 22l4.9-1.4A10 10 0 1012 2zm0 18.2a8.2 8.2 0 01-4.2-1.2l-.3-.2-2.9.8.8-2.8-.2-.3A8.2 8.2 0 1112 20.2zm4.5-6.1c-.2-.1-1.5-.7-1.7-.8-.2-.1-.4-.1-.5.1-.2.2-.6.8-.8 1-.1.2-.3.2-.5.1a6.7 6.7 0 01-3.3-2.9c-.3-.4 0-.5.2-.7l.4-.5c.1-.2.1-.3 0-.5l-.8-1.9c-.2-.5-.4-.4-.5-.4h-.5a1 1 0 00-.7.3c-.2.2-.9.9-.9 2.2s.9 2.5 1 2.7c.1.2 1.8 2.7 4.3 3.8 1.6.7 2.2.8 3 .6.5-.1 1.5-.6 1.7-1.2.2-.6.2-1.1.2-1.2-.1-.2-.3-.2-.5-.3z" />
+                  </svg>
+                  Konfirmasi Pembayaran
+                </a>
+              ) : (
+                <p className="mt-2 text-[11px] text-[var(--muted)]">Nomor WhatsApp belum diatur admin. Hubungi admin untuk bantuan.</p>
+              )}
+            </div>
+
             <button type="button" onClick={onClose} className="w-full text-xs text-[var(--muted)] hover:text-white transition mt-3">
               Batalkan pesanan
             </button>
