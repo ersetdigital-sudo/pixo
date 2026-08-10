@@ -70,10 +70,6 @@ export function FooterCompact() {
           </ul>
         </div>
       </div>
-      <div className="mx-auto max-w-7xl border-t border-white/10 px-5 py-6 text-center text-xs text-[var(--muted)]">
-        <p>© 2026 PIXOGAMEONLINE. All rights reserved.</p>
-        <p className="mt-2">Nama game dan mata uang dalam game adalah milik publisher masing-masing. PIXOGAMEONLINE tidak berafiliasi dengan publisher mana pun.</p>
-      </div>
     </footer>
   );
 }

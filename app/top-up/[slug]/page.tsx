@@ -94,15 +94,15 @@ export default async function TopUpPage({ params }: { params: Promise<{ slug: st
 
   const dbItems =
     game && game.nominals.length > 0
-      ? game.nominals.map((n) => ({ label: n.nominal_label, price: n.price, category: n.category }))
+      ? game.nominals.map((n) => ({ label: n.nominal_label, price: n.price, category: n.category, badge: n.badge }))
       : [];
   const nominals =
     dbItems.length > 0
-      ? dbItems.filter((n) => n.category !== "pass").map(({ label, price }) => ({ label, price }))
+      ? dbItems.filter((n) => n.category !== "pass").map(({ label, price, badge }) => ({ label, price, badge }))
       : (staticGame?.nominals ?? []);
   const passes =
     dbItems.length > 0
-      ? dbItems.filter((n) => n.category === "pass").map(({ label, price }) => ({ label, price }))
+      ? dbItems.filter((n) => n.category === "pass").map(({ label, price, badge }) => ({ label, price, badge }))
       : (staticGame?.passes ?? []);
   const qrisUrl = await getQrisUrl().catch(() => "");
 

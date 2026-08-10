@@ -29,10 +29,14 @@ create table if not exists public.pricing (
   nominal_label text not null,
   price integer not null check (price > 0),
   category text not null default 'nominal' check (category in ('nominal', 'pass')),
+  badge text,
   sort_order integer not null default 0,
   created_at timestamptz not null default now(),
   updated_at timestamptz not null default now()
 );
+
+-- Migrasi untuk database yang sudah terlanjur dibuat tanpa kolom badge
+alter table public.pricing add column if not exists badge text;
 
 create table if not exists public.settings (
   key text primary key,

@@ -4,7 +4,7 @@ import { ToastContainer } from "@/components/ui/Toast";
 
 export default async function AdminGamesPage() {
   let games: Array<{ id: string; name: string; range_label: string; is_active: boolean }> = [];
-  let allPricing: Array<{ id: string; game_id: string; nominal_label: string; price: number; category: string; sort_order: number }> = [];
+  let allPricing: Array<{ id: string; game_id: string; nominal_label: string; price: number; category: string; badge: string | null; sort_order: number }> = [];
   let errorMsg = "";
 
   try {
@@ -32,6 +32,7 @@ export default async function AdminGamesPage() {
       nominal_label: p.nominal_label,
       price: p.price,
       category: p.category,
+      badge: p.badge ?? null,
       sort_order: p.sort_order,
     }));
   } catch (e: unknown) {

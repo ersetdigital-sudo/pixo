@@ -22,6 +22,7 @@ export interface DbNominal {
   nominal_label: string;
   price: number;
   category: string;
+  badge: string | null;
   sort_order: number;
 }
 

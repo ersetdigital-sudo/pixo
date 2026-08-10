@@ -11,6 +11,7 @@ interface PricingItem {
   nominal_label: string;
   price: number;
   category: string;
+  badge: string | null;
 }
 
 interface GameCardProps {
@@ -21,6 +22,24 @@ interface GameCardProps {
     is_active: boolean;
   };
   nominals: PricingItem[];
+}
+
+const BADGE_OPTIONS: Array<{ value: string; label: string }> = [
+  { value: "", label: "Tanpa badge" },
+  { value: "terlaris", label: "Terlaris" },
+  { value: "best_value", label: "Best Value" },
+];
+
+function BadgeChip({ badge }: { badge: string | null }) {
+  if (!badge) return null;
+  const isBest = badge === "best_value";
+  return (
+    <span className={`ml-2 inline-flex items-center gap-1 rounded-full px-2 py-0.5 text-[10px] font-bold ${
+      isBest ? "bg-[#4c8dff]/15 text-[#9dc0ff]" : "bg-[#ff6a2c]/15 text-[#ffc24b]"
+    }`}>
+      {badge === "terlaris" ? "Terlaris" : "Best Value"}
+    </span>
+  );
 }
 
 function formatRupiah(value: number): string {
@@ -82,10 +101,12 @@ export function GamePricingCard({ game, nominals }: GameCardProps) {
   const [newLabel, setNewLabel] = useState("");
   const [newPrice, setNewPrice] = useState(0);
   const [newCategory, setNewCategory] = useState("nominal");
+  const [newBadge, setNewBadge] = useState("");
   const [editing, setEditing] = useState<string | null>(null);
   const [editLabel, setEditLabel] = useState("");
   const [editPrice, setEditPrice] = useState(0);
   const [editCategory, setEditCategory] = useState("nominal");
+  const [editBadge, setEditBadge] = useState("");
   const [loading, setLoading] = useState(false);
   const [deleteTarget, setDeleteTarget] = useState<PricingItem | null>(null);
 
@@ -104,11 +125,12 @@ export function GamePricingCard({ game, nominals }: GameCardProps) {
 
     setLoading(true);
     try {
-      await addPricing(game.id, label, newPrice, newCategory);
-      setItems([...items, { id: "temp-" + Date.now(), nominal_label: label, price: newPrice, category: newCategory }]);
+      await addPricing(game.id, label, newPrice, newCategory, newBadge);
+      setItems([...items, { id: "temp-" + Date.now(), nominal_label: label, price: newPrice, category: newCategory, badge: newBadge || null }]);
       setNewLabel("");
       setNewPrice(0);
       setNewCategory("nominal");
+      setNewBadge("");
       showToast("success", "Berhasil ditambahkan.");
     } catch (e: unknown) {
       showToast("error", "Gagal menambah: " + String(e));
@@ -130,8 +152,8 @@ export function GamePricingCard({ game, nominals }: GameCardProps) {
 
     setLoading(true);
     try {
-      await updatePricing(id, label, editPrice, editCategory);
-      setItems(items.map((i) => (i.id === id ? { ...i, nominal_label: label, price: editPrice, category: editCategory } : i)));
+      await updatePricing(id, label, editPrice, editCategory, editBadge);
+      setItems(items.map((i) => (i.id === id ? { ...i, nominal_label: label, price: editPrice, category: editCategory, badge: editBadge || null } : i)));
       setEditing(null);
       showToast("success", "Harga berhasil disimpan.");
     } catch (e: unknown) {
@@ -204,6 +226,16 @@ export function GamePricingCard({ game, nominals }: GameCardProps) {
                     <option value="nominal">Nominal</option>
                     <option value="pass">Paket Spesial</option>
                   </select>
+                  <select
+                    value={editBadge}
+                    onChange={(e) => setEditBadge(e.target.value)}
+                    className={`shrink-0 ${inputClass}`}
+                    title="Badge"
+                  >
+                    {BADGE_OPTIONS.map((o) => (
+                      <option key={o.value} value={o.value}>{o.label}</option>
+                    ))}
+                  </select>
                   <RupiahInput
                     value={editPrice}
                     onChange={setEditPrice}
@@ -233,6 +265,7 @@ export function GamePricingCard({ game, nominals }: GameCardProps) {
                     {item.category === "pass" && (
                       <span className="ml-2 rounded-full bg-[#ffc24b]/15 px-2 py-0.5 text-[10px] font-bold text-[#ffc24b]">Paket Spesial</span>
                     )}
+                    <BadgeChip badge={item.badge} />
                   </span>
                   <span className="shrink-0 text-sm text-muted font-mono tabular-nums">
                     {formatRupiah(item.price)}
@@ -243,6 +276,7 @@ export function GamePricingCard({ game, nominals }: GameCardProps) {
                       setEditLabel(item.nominal_label);
                       setEditPrice(item.price);
                       setEditCategory(item.category);
+                      setEditBadge(item.badge ?? "");
                     }}
                     disabled={loading}
                     className="shrink-0 w-9 h-9 flex items-center justify-center rounded-lg bg-paper-2 text-muted hover:text-[#ffc24b] hover:bg-[#ffc24b]/10 transition disabled:opacity-50"
@@ -273,6 +307,16 @@ export function GamePricingCard({ game, nominals }: GameCardProps) {
           >
             <option value="nominal">Nominal</option>
             <option value="pass">Paket Spesial</option>
+          </select>
+          <select
+            value={newBadge}
+            onChange={(e) => setNewBadge(e.target.value)}
+            className={`shrink-0 ${inputClass}`}
+            title="Badge"
+          >
+            {BADGE_OPTIONS.map((o) => (
+              <option key={o.value} value={o.value}>{o.label}</option>
+            ))}
           </select>
           <input
             value={newLabel}

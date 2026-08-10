@@ -26,7 +26,7 @@ export async function logout() {
   redirect("/admin/login");
 }
 
-export async function addPricing(gameId: string, nominalLabel: string, price: number, category: string = "nominal") {
+export async function addPricing(gameId: string, nominalLabel: string, price: number, category: string = "nominal", badge: string = "") {
   const supabase = await createSupabaseServerClient();
 
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
@@ -43,6 +43,7 @@ export async function addPricing(gameId: string, nominalLabel: string, price: nu
     nominal_label: nominalLabel,
     price,
     category,
+    badge: badge || null,
     sort_order: (last?.sort_order ?? 0) + 1,
   });
 
@@ -50,7 +51,7 @@ export async function addPricing(gameId: string, nominalLabel: string, price: nu
   await revalidateGame(gameId);
 }
 
-export async function updatePricing(id: string, nominalLabel: string, price: number, category: string = "nominal") {
+export async function updatePricing(id: string, nominalLabel: string, price: number, category: string = "nominal", badge: string = "") {
   const supabase = await createSupabaseServerClient();
 
   // Get game_id before update
@@ -62,7 +63,7 @@ export async function updatePricing(id: string, nominalLabel: string, price: num
 
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   const { error } = await (supabase.from("pricing") as any)
-    .update({ nominal_label: nominalLabel, price, category })
+    .update({ nominal_label: nominalLabel, price, category, badge: badge || null })
     .eq("id", id);
   if (error) throw error.message;
 

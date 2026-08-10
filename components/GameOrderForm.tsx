@@ -8,6 +8,7 @@ import { formatRupiah } from "@/lib/format";
 export interface NominalItem {
   label: string;
   price: number;
+  badge?: string | null;
 }
 
 interface GameOrderFormProps {
@@ -66,20 +67,12 @@ export function GameOrderForm({
     setCheckoutOpen(true);
   };
 
-  const badgeFor = (label: string): string | null => {
-    if (slug === "mobile-legends") {
-      if (label === "86 Diamond") return "Terlaris";
-      if (label === "706 Diamond") return "Best value";
-    }
-    return null;
-  };
-
   const displayNominals = nominals.length > 0 ? nominals : [{ label: "5 Diamond", price: 1500 }];
 
   const nominalButtons = (list: NominalItem[], compact: boolean) => (
     <div className={`grid grid-cols-2 gap-3 ${compact ? "" : "lg:grid-cols-3"}`}>
       {list.map((n) => {
-        const badge = badgeFor(n.label);
+        const badge = n.badge;
         return (
           <button
             key={n.label}
@@ -90,15 +83,15 @@ export function GameOrderForm({
             {badge && (
               <span
                 className={`flex items-center justify-center gap-1 py-1 text-[10px] font-extrabold uppercase tracking-[.14em] ${
-                  badge === "Terlaris"
-                    ? "bg-gradient-to-r from-[#ffc24b] to-[#ff8a2e] text-[#0a1024]"
-                    : "bg-gradient-to-r from-[#6ea2ff] to-[#4c8dff] text-white"
+                  badge === "best_value"
+                    ? "bg-gradient-to-r from-[#6ea2ff] to-[#4c8dff] text-white"
+                    : "bg-gradient-to-r from-[#ffc24b] to-[#ff8a2e] text-[#0a1024]"
                 }`}
               >
                 <svg viewBox="0 0 20 20" className="h-3 w-3" fill="currentColor">
                   <path d="M10 1.5 12.2 6l5 .6-3.7 3.4 1 4.9L10 12.2l-4.5 2.7 1-4.9L2.8 6.6l5-.6z" />
                 </svg>
-                {badge}
+                {badge === "best_value" ? "Best Value" : "Terlaris"}
               </span>
             )}
             <div className={badge ? "p-3.5 pt-2.5" : "p-4"}>
