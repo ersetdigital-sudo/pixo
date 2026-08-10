@@ -64,7 +64,7 @@ export function CheckoutOverlay({ order, onClose }: CheckoutOverlayProps) {
   return (
     <div className="fixed inset-0 z-[120] grid place-items-center p-5" style={{ background: "rgba(4,8,22,.7)" }}>
       <div className="absolute inset-0" onClick={onClose} />
-      <div className="relative max-w-[400px] w-full p-7 text-center border border-white/10 shadow-2xl rounded-[28px] card">
+      <div className="relative max-w-[400px] w-full max-h-[calc(100dvh-2.5rem)] overflow-y-auto overscroll-contain p-7 text-center border border-white/10 shadow-2xl rounded-[28px] card">
         {step === "pay" && (
           <div>
             <div className="flex items-start justify-between gap-4 mb-5">
