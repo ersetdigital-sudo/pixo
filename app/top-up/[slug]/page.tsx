@@ -184,7 +184,7 @@ export default async function TopUpPage({ params }: { params: Promise<{ slug: st
       <Nav />
 
       {/* BREADCRUMB */}
-      <nav aria-label="Breadcrumb" className="border-b border-white/[.07]">
+      <nav aria-label="Breadcrumb" className="hidden border-b border-white/[.07] md:block">
         <ol className="mx-auto flex max-w-7xl flex-wrap items-center gap-2 px-5 py-4 text-sm text-[var(--muted)]">
           <li><Link href="/" className="transition hover:text-white">Beranda</Link></li>
           <li aria-hidden="true" className="text-white/25">/</li>
@@ -194,8 +194,8 @@ export default async function TopUpPage({ params }: { params: Promise<{ slug: st
         </ol>
       </nav>
 
-      {/* HEADER PRODUK */}
-      <section className="relative overflow-hidden border-b border-white/10">
+      {/* HEADER PRODUK (desktop only; mobile punya hero sendiri di GameOrderForm) */}
+      <section className="relative hidden overflow-hidden border-b border-white/10 md:block">
         <div className="glow -left-20 top-0 h-72 w-72 bg-[#ff6a2c]"></div>
         <div className="glow right-0 top-10 h-80 w-80 bg-[#4c8dff]"></div>
         <div className="relative mx-auto flex max-w-7xl flex-col gap-8 px-5 py-12 md:flex-row md:items-center md:py-16">
@@ -244,15 +244,17 @@ export default async function TopUpPage({ params }: { params: Promise<{ slug: st
         nominals={nominals}
         passes={passes}
         qrisUrl={qrisUrl}
+        gameLogo={staticGame?.logo}
+        gameAlt={staticGame?.alt}
       />
 
       {/* GAME LAIN */}
       <section className="border-t border-white/10 bg-white/[.02]">
         <div className="mx-auto max-w-7xl px-5 py-16">
           <h2 className="text-2xl font-extrabold sm:text-3xl">Top Up Game Lain</h2>
-          <div className="mt-6 grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
+          <div className="mt-6 flex snap-x snap-mandatory gap-4 overflow-x-auto pb-2 [-ms-overflow-style:none] [scrollbar-width:none] sm:grid sm:snap-none sm:grid-cols-2 sm:overflow-visible sm:pb-0 sm:[scrollbar-width:auto] lg:grid-cols-4 [&::-webkit-scrollbar]:hidden sm:[&::-webkit-scrollbar]:auto">
             {otherGames.map((og) => (
-              <Link key={og.slug} href={`/top-up/${og.slug}`} className="card group rounded-2xl p-5 transition hover:border-[#ffc24b]/50">
+              <Link key={og.slug} href={`/top-up/${og.slug}`} className="card group w-64 shrink-0 snap-start rounded-2xl p-5 transition hover:border-[#ffc24b]/50 sm:w-auto">
                 <p className="font-bold">{og.name}</p>
                 <p className="mt-1 text-xs text-[var(--cyan)]">{og.cur}{og.nominals.length > 0 ? ` · mulai Rp${Math.min(...og.nominals.map((n) => n.price)).toLocaleString("id-ID")}` : ""}</p>
               </Link>
