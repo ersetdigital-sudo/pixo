@@ -141,11 +141,20 @@ export function CheckoutOverlay({ order, onClose }: CheckoutOverlayProps) {
               <div className="border-t border-white/10 pt-3 flex justify-between items-center"><span className="text-[var(--muted)]">Total</span><span className="display text-xl font-extrabold grad">{formatRupiah(order.total)}</span></div>
             </div>
 
-            <div className="mt-4 rounded-2xl border border-emerald-400/20 bg-emerald-400/[.06] p-4 text-left">
-              <p className="text-xs font-bold text-emerald-400">Sudah bayar tapi item belum masuk?</p>
-              <p className="mt-0.5 text-[11px] leading-relaxed text-[var(--muted)]">
-                Klik tombol di bawah untuk konfirmasi pembayaran via WhatsApp ke admin.
-              </p>
+            <div className="mt-4 rounded-2xl border border-emerald-400/20 bg-emerald-400/[.06] p-4">
+              <div className="flex items-start gap-3">
+                <span className="grid h-10 w-10 shrink-0 place-items-center rounded-xl bg-emerald-400/15">
+                  <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#34d399" strokeWidth="1.7" strokeLinecap="round" strokeLinejoin="round">
+                    <path d="M21 11.5a8.38 8.38 0 01-.9 3.8 8.5 8.5 0 01-7.6 4.7 8.38 8.38 0 01-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 01-.9-3.8 8.5 8.5 0 014.7-7.6 8.38 8.38 0 013.8-.9h.5a8.48 8.48 0 018 8v.5z" />
+                  </svg>
+                </span>
+                <div className="min-w-0 flex-1">
+                  <p className="text-xs font-bold text-emerald-400">Sudah bayar tapi item belum masuk?</p>
+                  <p className="mt-0.5 text-[11px] leading-relaxed text-[var(--muted)]">
+                    Klik tombol di bawah untuk konfirmasi pembayaran via WhatsApp ke admin.
+                  </p>
+                </div>
+              </div>
               {waUrl ? (
                 <a
                   href={waUrl}
